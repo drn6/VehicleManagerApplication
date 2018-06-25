@@ -1,0 +1,110 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myVehicleLabel" jhiTranslate="vehicleManagerApplicationApp.vehicle.home.createOrEditLabel">Create or edit a Vehicle</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!vehicle.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="vehicle.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicle.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="vehicle.name" required maxlength="100"/>
+            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                   This field cannot be longer than 100 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicle.numberPlate" for="field_numberPlate">Number Plate</label>
+            <input type="text" class="form-control" name="numberPlate" id="field_numberPlate"
+                [(ngModel)]="vehicle.numberPlate" required maxlength="50"/>
+            <div [hidden]="!(editForm.controls.numberPlate?.dirty && editForm.controls.numberPlate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.numberPlate?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.numberPlate?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                   This field cannot be longer than 50 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicle.numberOfPlace" for="field_numberOfPlace">Number Of Place</label>
+            <input type="number" class="form-control" name="numberOfPlace" id="field_numberOfPlace"
+                [(ngModel)]="vehicle.numberOfPlace" required min="1" max="300"/>
+            <div [hidden]="!(editForm.controls.numberOfPlace?.dirty && editForm.controls.numberOfPlace?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.numberOfPlace?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.numberOfPlace?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 1 }">
+                    This field should be at least 1.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.numberOfPlace?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 300 }">
+                    This field cannot be more than 300.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.numberOfPlace?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicle.createdBy" for="field_createdBy">Created By</label>
+            <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                [(ngModel)]="vehicle.createdBy" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicle.createdDate" for="field_createdDate">Created Date</label>
+            <div class="d-flex">
+                <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" [(ngModel)]="vehicle.createdDate"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicle.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
+            <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
+                [(ngModel)]="vehicle.lastModifiedBy" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicle.lastModifiedDate" for="field_lastModifiedDate">Last Modified Date</label>
+            <div class="d-flex">
+                <input id="field_lastModifiedDate" type="datetime-local" class="form-control" name="lastModifiedDate" [(ngModel)]="vehicle.lastModifiedDate"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicle.status" for="field_status">Status</label>
+            <select class="form-control" name="status" [(ngModel)]="vehicle.status" id="field_status" >
+                <option value="ENABLED">{{'vehicleManagerApplicationApp.StatusType.ENABLED' | translate}}</option>
+                <option value="DISABLED">{{'vehicleManagerApplicationApp.StatusType.DISABLED' | translate}}</option>
+                <option value="DELETED">{{'vehicleManagerApplicationApp.StatusType.DELETED' | translate}}</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,110 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "vehicle",
+            "otherEntityName": "vehicle",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "detail",
+            "otherEntityName": "vehicleTaskDetails",
+            "otherEntityRelationshipName": "vehicleTask"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "cost",
+            "otherEntityName": "cost",
+            "otherEntityRelationshipName": "vehicleTask"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "driver",
+            "otherEntityName": "driver",
+            "otherEntityField": "firstName",
+            "ownerSide": true
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 100
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "VehicleTaskType",
+            "fieldValues": "JOURNEY,MAINTENANCE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "maxDrivers",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": 1,
+            "fieldValidateRulesMax": 3
+        },
+        {
+            "fieldName": "startDateTime",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "endDateTime",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "StatusType",
+            "fieldValues": "ENABLED,DISABLED,DELETED"
+        }
+    ],
+    "changelogDate": "20180620120337",
+    "entityTableName": "vehicle_task",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "angularJSSuffix": "vma"
+}

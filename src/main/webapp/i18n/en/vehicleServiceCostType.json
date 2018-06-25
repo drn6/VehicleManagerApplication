@@ -1,0 +1,10 @@
+{
+    "vehicleManagerApplicationApp": {
+        "VehicleServiceCostType" : {
+            "null": "",
+            "SPECIAL": "SPECIAL",
+            "REGULAR": "REGULAR",
+            "HOLIDAY": "HOLIDAY"
+        }
+    }
+}

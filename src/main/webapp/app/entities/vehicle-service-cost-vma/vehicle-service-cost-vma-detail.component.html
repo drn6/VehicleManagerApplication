@@ -1,0 +1,68 @@
+
+<div *ngIf="vehicleServiceCost">
+    <h2><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.detail.title">Vehicle Service Cost</span> {{vehicleServiceCost.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.name">Name</span></dt>
+        <dd>
+            <span>{{vehicleServiceCost.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.type">Type</span></dt>
+        <dd>
+            <span jhiTranslate="{{'vehicleManagerApplicationApp.VehicleServiceCostType.' + vehicleServiceCost.type}}">{{vehicleServiceCost.type}}</span>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.perDay">Per Day</span></dt>
+        <dd>
+            <span>{{vehicleServiceCost.perDay}}</span>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.perKM">Per KM</span></dt>
+        <dd>
+            <span>{{vehicleServiceCost.perKM}}</span>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.perDiver">Per Diver</span></dt>
+        <dd>
+            <span>{{vehicleServiceCost.perDiver}}</span>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vehicleServiceCost.createdBy}}</span>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vehicleServiceCost.createdDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vehicleServiceCost.lastModifiedBy}}</span>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vehicleServiceCost.lastModifiedDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.status">Status</span></dt>
+        <dd>
+            <span jhiTranslate="{{'vehicleManagerApplicationApp.StatusType.' + vehicleServiceCost.status}}">{{vehicleServiceCost.status}}</span>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.vehicle">Vehicle</span></dt>
+        <dd>
+            <div *ngIf="vehicleServiceCost.vehicle">
+                <a [routerLink]="['/vehicle-vma', vehicleServiceCost.vehicle?.id]">{{vehicleServiceCost.vehicle?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'vehicle-service-cost-vma/'+ vehicleServiceCost.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

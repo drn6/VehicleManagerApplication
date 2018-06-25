@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity VehicleTask.
+    -->
+    <changeSet id="20180620120337-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="vehicle_id"
+                                 baseTableName="vehicle_task"
+                                 constraintName="fk_vehicle_task_vehicle_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vehicle"/>
+
+        <addForeignKeyConstraint baseColumnNames="vehicle_tasks_id"
+                                 baseTableName="vehicle_task_driver"
+                                 constraintName="fk_vehicle_task_driver_vehicle_tasks_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vehicle_task"/>
+        <addForeignKeyConstraint baseColumnNames="drivers_id"
+                                 baseTableName="vehicle_task_driver"
+                                 constraintName="fk_vehicle_task_driver_drivers_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="driver"/>
+        
+    </changeSet>
+</databaseChangeLog>

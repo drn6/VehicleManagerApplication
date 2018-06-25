@@ -1,0 +1,109 @@
+entity Vehicle {
+  name String required maxlength(100),
+  numberPlate String required maxlength(50),
+  numberOfPlace Integer required min(1) max(300),
+  createdBy String,
+  createdDate Instant,
+  lastModifiedBy String
+  lastModifiedDate Instant,
+  status StatusType
+}
+
+entity VehicleTask {
+	name String required maxlength(100),
+    type VehicleTaskType required,
+  	description String required,
+  	maxDrivers Integer required required min(1) max(3),
+  	startDateTime ZonedDateTime required,
+  	endDateTime ZonedDateTime required,
+  	createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant,
+    status StatusType
+}
+
+entity VehicleTaskDetails {
+	name String required maxlength(100),
+  	description String required,
+  	startDateTime ZonedDateTime,
+  	endDateTime ZonedDateTime,
+  	createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant,
+    status StatusType
+}
+
+
+entity Driver {
+	firstName String required maxlength(100),
+	lastName String required maxlength(100),
+	email String required maxlength(100),
+    businessIdentification String required maxlength(255),
+	phoneNumber String required,
+	createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant,
+    status StatusType
+}
+
+entity VehicleServiceCost {
+ 	name String required maxlength(100),
+ 	type VehicleServiceCostType required,
+    perDay Double required min(1),
+    perKM Double required min(1),
+    perDiver Double required min(1),    
+ 	createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant,
+    status StatusType
+}
+
+entity Cost {
+ 	name String required maxlength(100),
+ 	type CostType required,
+    cost Double required,
+ 	createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant,
+    status StatusType
+}
+
+
+enum CostType {
+    KM, DRIVER, FUEL, INFRASTRUCTURES, STRUCTURE, MAINTENANCE
+}
+
+enum VehicleServiceCostType {
+    SPECIAL, REGULAR, HOLIDAY
+}
+
+enum VehicleTaskType {
+    JOURNEY, MAINTENANCE
+}
+enum StatusType {
+    ENABLED, DISABLED, DELETED
+}
+
+relationship ManyToMany {
+	VehicleTask{driver(firstName)} to Driver
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	 VehicleTask{detail(name)} to VehicleTaskDetails
+     VehicleTask{cost(name)} to Cost
+     Vehicle{cost(name)} to VehicleServiceCost
+     Vehicle{task(name)} to VehicleTask
+}
+
+// Set pagination options
+paginate * with pagination
+// Set service options to all except few
+service all with serviceImpl
+// Set an angular suffix
+angularSuffix * with vma

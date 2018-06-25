@@ -1,0 +1,111 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myCostLabel" jhiTranslate="vehicleManagerApplicationApp.cost.home.createOrEditLabel">Create or edit a Cost</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!cost.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="cost.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.cost.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="cost.name" required maxlength="100"/>
+            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                   This field cannot be longer than 100 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.cost.type" for="field_type">Type</label>
+            <select class="form-control" name="type" [(ngModel)]="cost.type" id="field_type"  required>
+                <option value="KM">{{'vehicleManagerApplicationApp.CostType.KM' | translate}}</option>
+                <option value="DRIVER">{{'vehicleManagerApplicationApp.CostType.DRIVER' | translate}}</option>
+                <option value="FUEL">{{'vehicleManagerApplicationApp.CostType.FUEL' | translate}}</option>
+                <option value="INFRASTRUCTURES">{{'vehicleManagerApplicationApp.CostType.INFRASTRUCTURES' | translate}}</option>
+                <option value="STRUCTURE">{{'vehicleManagerApplicationApp.CostType.STRUCTURE' | translate}}</option>
+                <option value="MAINTENANCE">{{'vehicleManagerApplicationApp.CostType.MAINTENANCE' | translate}}</option>
+            </select>
+            <div [hidden]="!(editForm.controls.type?.dirty && editForm.controls.type?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.type?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.cost.cost" for="field_cost">Cost</label>
+            <input type="number" class="form-control" name="cost" id="field_cost"
+                [(ngModel)]="cost.cost" required/>
+            <div [hidden]="!(editForm.controls.cost?.dirty && editForm.controls.cost?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.cost?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.cost?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.cost.createdBy" for="field_createdBy">Created By</label>
+            <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                [(ngModel)]="cost.createdBy" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.cost.createdDate" for="field_createdDate">Created Date</label>
+            <div class="d-flex">
+                <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" [(ngModel)]="cost.createdDate"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.cost.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
+            <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
+                [(ngModel)]="cost.lastModifiedBy" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.cost.lastModifiedDate" for="field_lastModifiedDate">Last Modified Date</label>
+            <div class="d-flex">
+                <input id="field_lastModifiedDate" type="datetime-local" class="form-control" name="lastModifiedDate" [(ngModel)]="cost.lastModifiedDate"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.cost.status" for="field_status">Status</label>
+            <select class="form-control" name="status" [(ngModel)]="cost.status" id="field_status" >
+                <option value="ENABLED">{{'vehicleManagerApplicationApp.StatusType.ENABLED' | translate}}</option>
+                <option value="DISABLED">{{'vehicleManagerApplicationApp.StatusType.DISABLED' | translate}}</option>
+                <option value="DELETED">{{'vehicleManagerApplicationApp.StatusType.DELETED' | translate}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.cost.vehicleTask" for="field_vehicleTask">Vehicle Task</label>
+            <select class="form-control" id="field_vehicleTask" name="vehicleTask" [(ngModel)]="cost.vehicleTask" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="vehicleTaskOption.id === cost.vehicleTask?.id ? cost.vehicleTask : vehicleTaskOption" *ngFor="let vehicleTaskOption of vehicletasks; trackBy: trackVehicleTaskById">{{vehicleTaskOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

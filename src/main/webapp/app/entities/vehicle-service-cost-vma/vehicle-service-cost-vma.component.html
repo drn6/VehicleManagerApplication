@@ -1,0 +1,90 @@
+<div>
+    <h2>
+        <span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.home.title">Vehicle Service Costs</span>
+        <button class="btn btn-primary float-right jh-create-entity create-vehicle-service-cost-vma" [routerLink]="['/', { outlets: { popup: ['vehicle-service-cost-vma-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.home.createLabel">
+            Create new Vehicle Service Cost
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="vehicleServiceCosts">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.name">Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="type"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.type">Type</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="perDay"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.perDay">Per Day</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="perKM"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.perKM">Per KM</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="perDiver"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.perDiver">Per Diver</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="createdBy"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.createdBy">Created By</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="createdDate"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.createdDate">Created Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lastModifiedBy"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.lastModifiedBy">Last Modified By</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lastModifiedDate"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.lastModifiedDate">Last Modified Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="status"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.status">Status</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="vehicle.id"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.vehicle">Vehicle</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let vehicleServiceCost of vehicleServiceCosts ;trackBy: trackId">
+                <td><a [routerLink]="['../vehicle-service-cost-vma', vehicleServiceCost.id ]">{{vehicleServiceCost.id}}</a></td>
+                <td>{{vehicleServiceCost.name}}</td>
+                <td jhiTranslate="{{'vehicleManagerApplicationApp.VehicleServiceCostType.' + vehicleServiceCost.type}}">{{vehicleServiceCost.type}}</td>
+                <td>{{vehicleServiceCost.perDay}}</td>
+                <td>{{vehicleServiceCost.perKM}}</td>
+                <td>{{vehicleServiceCost.perDiver}}</td>
+                <td>{{vehicleServiceCost.createdBy}}</td>
+                <td>{{vehicleServiceCost.createdDate | date:'medium'}}</td>
+                <td>{{vehicleServiceCost.lastModifiedBy}}</td>
+                <td>{{vehicleServiceCost.lastModifiedDate | date:'medium'}}</td>
+                <td jhiTranslate="{{'vehicleManagerApplicationApp.StatusType.' + vehicleServiceCost.status}}">{{vehicleServiceCost.status}}</td>
+                <td>
+                    <div *ngIf="vehicleServiceCost.vehicle">
+                        <a [routerLink]="['../vehicle-vma', vehicleServiceCost.vehicle?.id ]" >{{vehicleServiceCost.vehicle?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../vehicle-service-cost-vma', vehicleServiceCost.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'vehicle-service-cost-vma/'+ vehicleServiceCost.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'vehicle-service-cost-vma/'+ vehicleServiceCost.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="vehicleServiceCosts && vehicleServiceCosts.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

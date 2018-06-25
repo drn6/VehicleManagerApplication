@@ -1,0 +1,31 @@
+
+{
+    "vehicleManagerApplicationApp": {
+        "driver" : {
+            "home": {
+                "title": "Drivers",
+                "createLabel": "Créer un nouveau Driver",
+                "createOrEditLabel": "Créer ou éditer un Driver"
+            },
+            "created": "Un nouveau Driver a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Driver avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Driver avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Driver {{ id }} ?"
+            },
+            "detail": {
+                "title": "Driver"
+            },
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "email": "Email",
+            "businessIdentification": "Business Identification",
+            "phoneNumber": "Phone Number",
+            "createdBy": "Created By",
+            "createdDate": "Created Date",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifiedDate": "Last Modified Date",
+            "status": "Status"
+        }
+    }
+}

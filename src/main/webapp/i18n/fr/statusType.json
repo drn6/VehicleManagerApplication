@@ -1,0 +1,10 @@
+{
+    "vehicleManagerApplicationApp": {
+        "StatusType" : {
+            "null": "",
+            "ENABLED": "ENABLED",
+            "DISABLED": "DISABLED",
+            "DELETED": "DELETED"
+        }
+    }
+}

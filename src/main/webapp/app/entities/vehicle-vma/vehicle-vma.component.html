@@ -1,0 +1,80 @@
+<div>
+    <h2>
+        <span jhiTranslate="vehicleManagerApplicationApp.vehicle.home.title">Vehicles</span>
+        <button class="btn btn-primary float-right jh-create-entity create-vehicle-vma" [routerLink]="['/', { outlets: { popup: ['vehicle-vma-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="vehicleManagerApplicationApp.vehicle.home.createLabel">
+            Create new Vehicle
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="vehicles">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span jhiTranslate="vehicleManagerApplicationApp.vehicle.name">Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="numberPlate"><span jhiTranslate="vehicleManagerApplicationApp.vehicle.numberPlate">Number Plate</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="numberOfPlace"><span jhiTranslate="vehicleManagerApplicationApp.vehicle.numberOfPlace">Number Of Place</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="createdBy"><span jhiTranslate="vehicleManagerApplicationApp.vehicle.createdBy">Created By</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="createdDate"><span jhiTranslate="vehicleManagerApplicationApp.vehicle.createdDate">Created Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lastModifiedBy"><span jhiTranslate="vehicleManagerApplicationApp.vehicle.lastModifiedBy">Last Modified By</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lastModifiedDate"><span jhiTranslate="vehicleManagerApplicationApp.vehicle.lastModifiedDate">Last Modified Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="status"><span jhiTranslate="vehicleManagerApplicationApp.vehicle.status">Status</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let vehicle of vehicles ;trackBy: trackId">
+                <td><a [routerLink]="['../vehicle-vma', vehicle.id ]">{{vehicle.id}}</a></td>
+                <td>{{vehicle.name}}</td>
+                <td>{{vehicle.numberPlate}}</td>
+                <td>{{vehicle.numberOfPlace}}</td>
+                <td>{{vehicle.createdBy}}</td>
+                <td>{{vehicle.createdDate | date:'medium'}}</td>
+                <td>{{vehicle.lastModifiedBy}}</td>
+                <td>{{vehicle.lastModifiedDate | date:'medium'}}</td>
+                <td jhiTranslate="{{'vehicleManagerApplicationApp.StatusType.' + vehicle.status}}">{{vehicle.status}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../vehicle-vma', vehicle.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'vehicle-vma/'+ vehicle.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'vehicle-vma/'+ vehicle.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="vehicles && vehicles.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

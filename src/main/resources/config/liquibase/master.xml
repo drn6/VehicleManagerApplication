@@ -5,6 +5,17 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180620120336_added_entity_Vehicle.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180620120337_added_entity_VehicleTask.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180620120338_added_entity_VehicleTaskDetails.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180620120339_added_entity_Driver.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180620120340_added_entity_VehicleServiceCost.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180620120341_added_entity_Cost.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20180620120337_added_entity_constraints_VehicleTask.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180620120338_added_entity_constraints_VehicleTaskDetails.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180620120340_added_entity_constraints_VehicleServiceCost.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180620120341_added_entity_constraints_Cost.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180620200336_init-data.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

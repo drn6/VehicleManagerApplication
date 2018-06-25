@@ -1,0 +1,76 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "cost",
+            "otherEntityName": "vehicleServiceCost",
+            "otherEntityRelationshipName": "vehicle"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "task",
+            "otherEntityName": "vehicleTask",
+            "otherEntityRelationshipName": "vehicle"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 100
+        },
+        {
+            "fieldName": "numberPlate",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "numberOfPlace",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": 1,
+            "fieldValidateRulesMax": 300
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "StatusType",
+            "fieldValues": "ENABLED,DISABLED,DELETED"
+        }
+    ],
+    "changelogDate": "20180620120336",
+    "entityTableName": "vehicle",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "angularJSSuffix": "vma"
+}

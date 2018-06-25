@@ -1,0 +1,78 @@
+
+<div *ngIf="vehicleTask">
+    <h2><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.detail.title">Vehicle Task</span> {{vehicleTask.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.name">Name</span></dt>
+        <dd>
+            <span>{{vehicleTask.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.type">Type</span></dt>
+        <dd>
+            <span jhiTranslate="{{'vehicleManagerApplicationApp.VehicleTaskType.' + vehicleTask.type}}">{{vehicleTask.type}}</span>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.description">Description</span></dt>
+        <dd>
+            <span>{{vehicleTask.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.maxDrivers">Max Drivers</span></dt>
+        <dd>
+            <span>{{vehicleTask.maxDrivers}}</span>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.startDateTime">Start Date Time</span></dt>
+        <dd>
+            <span>{{vehicleTask.startDateTime | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.endDateTime">End Date Time</span></dt>
+        <dd>
+            <span>{{vehicleTask.endDateTime | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vehicleTask.createdBy}}</span>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vehicleTask.createdDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vehicleTask.lastModifiedBy}}</span>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vehicleTask.lastModifiedDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.status">Status</span></dt>
+        <dd>
+            <span jhiTranslate="{{'vehicleManagerApplicationApp.StatusType.' + vehicleTask.status}}">{{vehicleTask.status}}</span>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.vehicle">Vehicle</span></dt>
+        <dd>
+            <div *ngIf="vehicleTask.vehicle">
+                <a [routerLink]="['/vehicle-vma', vehicleTask.vehicle?.id]">{{vehicleTask.vehicle?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.driver">Driver</span></dt>
+        <dd>
+            <span *ngFor="let driver of vehicleTask.drivers; let last = last">
+                <a [routerLink]="['/driver-vma', driver?.id ]">{{driver.firstName}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'vehicle-task-vma/'+ vehicleTask.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

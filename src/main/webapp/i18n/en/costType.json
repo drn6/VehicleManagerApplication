@@ -1,0 +1,13 @@
+{
+    "vehicleManagerApplicationApp": {
+        "CostType" : {
+            "null": "",
+            "KM": "KM",
+            "DRIVER": "DRIVER",
+            "FUEL": "FUEL",
+            "INFRASTRUCTURES": "INFRASTRUCTURES",
+            "STRUCTURE": "STRUCTURE",
+            "MAINTENANCE": "MAINTENANCE"
+        }
+    }
+}

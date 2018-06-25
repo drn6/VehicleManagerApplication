@@ -1,0 +1,4 @@
+id;first_name;last_name;email;business_identification;phone_number;status
+1;Driver;One;noreply@gmail.com;802 954 785 00021;+33660606968;ENABLED
+2;Driver;Two;noreply@gmail.com;802 954 785 00023;+33660660698;ENABLED
+3;Driver;Three;noreply@gmail.com;802 954 785 00024;+33606066691;ENABLED
