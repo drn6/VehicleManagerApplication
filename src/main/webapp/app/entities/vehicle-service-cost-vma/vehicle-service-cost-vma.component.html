@@ -10,6 +10,32 @@
     </h2>
     <jhi-alert></jhi-alert>
     <div class="row">
+        <div class="col-md-12">
+            <h4 jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.quotation">quotation</h4>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.km" for="field_km">KM</label>
+                <input type="number" class="form-control" name="km" id="field_km" min="1"
+                       [(ngModel)]="km" required maxlength="100" value="1"/>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.days" for="field_nbDays">Days</label>
+                <input type="number" class="form-control" name="nbDays" id="field_nbDays" min="1"
+                       [(ngModel)]="nbDays" required maxlength="100" value="1"/>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.driver" for="field_nbDriver">Driver</label>
+                <input type="number" class="form-control" name="nbDays" id="field_nbDriver"
+                       [(ngModel)]="nbDriver" required maxlength="100" value="1" min="1" max="2"/>
+            </div>
+        </div>
     </div>
     <br/>
     <div class="table-responsive" *ngIf="vehicleServiceCosts">
@@ -21,8 +47,9 @@
             <th jhiSortBy="perDay"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.perDay">Per Day</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="perKM"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.perKM">Per KM</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="perDiver"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.perDiver">Per Diver</span> <span class="fa fa-sort"></span></th>
+                <th> Cost </th>
             <th jhiSortBy="vehicle.id"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.vehicle">Vehicle</span> <span class="fa fa-sort"></span></th>
-            <th> Cost </th>
+
             <th></th>
             </tr>
             </thead>
@@ -30,10 +57,14 @@
             <tr *ngFor="let vehicleServiceCost of vehicleServiceCosts ;trackBy: trackId">
                 <td>{{vehicleServiceCost.name}}</td>
                 <td jhiTranslate="{{'vehicleManagerApplicationApp.VehicleServiceCostType.' + vehicleServiceCost.type}}">{{vehicleServiceCost.type}}</td>
-                <td>{{vehicleServiceCost.perDay}}</td>
-                <td>{{vehicleServiceCost.perKM}}</td>
-                <td>{{vehicleServiceCost.perDiver}}</td>
-                <td>xxx Euro</td>
+                <td>{{vehicleServiceCost.perDay}} €</td>
+                <td>{{vehicleServiceCost.perKM}} €</td>
+                <td>{{vehicleServiceCost.perDiver}} €</td>
+                <td><p>
+                    <span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.km">KM</span> : {{vehicleServiceCost.perKM*km}} € <span
+                    jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.days">Days</span>: {{vehicleServiceCost.perDay*nbDays}} € </p>
+                    <p><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.total">Total</span>: <b>{{vehicleServiceCost.perKM*km +
+                        vehicleServiceCost.perDay*nbDays + vehicleServiceCost.perDiver*nbDriver}} €</b>  </p></td>
                 <td>
                     <div *ngIf="vehicleServiceCost.vehicle">
                         <a [routerLink]="['../vehicle-vma', vehicleServiceCost.vehicle?.id ]" >{{vehicleServiceCost.vehicle?.id}}</a>

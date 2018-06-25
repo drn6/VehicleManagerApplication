@@ -13,7 +13,9 @@ import { ITEMS_PER_PAGE, Principal } from '../../shared';
     templateUrl: './vehicle-service-cost-vma.component.html'
 })
 export class VehicleServiceCostVmaComponent implements OnInit, OnDestroy {
-
+    km = 1000;
+    nbDays = 1;
+    nbDriver = 1;
 currentAccount: any;
     vehicleServiceCosts: VehicleServiceCostVma[];
     error: any;

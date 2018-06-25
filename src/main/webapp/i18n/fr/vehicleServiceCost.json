@@ -2,6 +2,14 @@
 {
     "vehicleManagerApplicationApp": {
         "vehicleServiceCost" : {
+            "quotation": "Devis",
+            "km":"KM",
+            "days":"Nb Jour",
+            "driver":"Nb chauffeur",
+            "perKm":"Tarif par KM",
+            "perDays":"Tarif par day",
+            "perDriver":"Tarif par chauffeur",
+            "total":"Total",
             "home": {
                 "title": "VehicleServiceCosts",
                 "createLabel": "Créer un nouveau Vehicle Service Cost",

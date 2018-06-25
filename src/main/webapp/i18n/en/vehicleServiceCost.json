@@ -2,6 +2,14 @@
 {
     "vehicleManagerApplicationApp": {
         "vehicleServiceCost" : {
+            "quotation": "Quotation",
+            "km":"Nb KM",
+            "days":"Nb day",
+            "driver":"Nb driver",
+            "perKm":"Price per KM",
+            "perDays":"Price per day",
+            "perDriver":"Price per driver",
+            "total":"Total",
             "home": {
                 "title": "Vehicle Service Costs",
                 "createLabel": "Create a new Vehicle Service Cost",
