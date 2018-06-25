@@ -16,32 +16,20 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.name">Name</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="description"><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.description">Description</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="startDateTime"><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.startDateTime">Start Date Time</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="endDateTime"><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.endDateTime">End Date Time</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="createdBy"><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.createdBy">Created By</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="createdDate"><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.createdDate">Created Date</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="lastModifiedBy"><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.lastModifiedBy">Last Modified By</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="lastModifiedDate"><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.lastModifiedDate">Last Modified Date</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="status"><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.status">Status</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="vehicleTask.id"><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.vehicleTask">Vehicle Task</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let vehicleTaskDetails of vehicleTaskDetails ;trackBy: trackId">
-                <td><a [routerLink]="['../vehicle-task-details-vma', vehicleTaskDetails.id ]">{{vehicleTaskDetails.id}}</a></td>
                 <td>{{vehicleTaskDetails.name}}</td>
                 <td>{{vehicleTaskDetails.description}}</td>
                 <td>{{vehicleTaskDetails.startDateTime | date:'medium'}}</td>
                 <td>{{vehicleTaskDetails.endDateTime | date:'medium'}}</td>
-                <td>{{vehicleTaskDetails.createdBy}}</td>
-                <td>{{vehicleTaskDetails.createdDate | date:'medium'}}</td>
-                <td>{{vehicleTaskDetails.lastModifiedBy}}</td>
-                <td>{{vehicleTaskDetails.lastModifiedDate | date:'medium'}}</td>
-                <td jhiTranslate="{{'vehicleManagerApplicationApp.StatusType.' + vehicleTaskDetails.status}}">{{vehicleTaskDetails.status}}</td>
                 <td>
                     <div *ngIf="vehicleTaskDetails.vehicleTask">
                         <a [routerLink]="['../vehicle-task-vma', vehicleTaskDetails.vehicleTask?.id ]" >{{vehicleTaskDetails.vehicleTask?.id}}</a>

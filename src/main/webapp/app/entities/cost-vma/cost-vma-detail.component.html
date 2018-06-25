@@ -16,26 +16,6 @@
         <dd>
             <span>{{cost.cost}}</span>
         </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.cost.createdBy">Created By</span></dt>
-        <dd>
-            <span>{{cost.createdBy}}</span>
-        </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.cost.createdDate">Created Date</span></dt>
-        <dd>
-            <span>{{cost.createdDate | date:'medium'}}</span>
-        </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.cost.lastModifiedBy">Last Modified By</span></dt>
-        <dd>
-            <span>{{cost.lastModifiedBy}}</span>
-        </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.cost.lastModifiedDate">Last Modified Date</span></dt>
-        <dd>
-            <span>{{cost.lastModifiedDate | date:'medium'}}</span>
-        </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.cost.status">Status</span></dt>
-        <dd>
-            <span jhiTranslate="{{'vehicleManagerApplicationApp.StatusType.' + cost.status}}">{{cost.status}}</span>
-        </dd>
         <dt><span jhiTranslate="vehicleManagerApplicationApp.cost.vehicleTask">Vehicle Task</span></dt>
         <dd>
             <div *ngIf="cost.vehicleTask">

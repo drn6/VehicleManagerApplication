@@ -16,34 +16,24 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.name">Name</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="type"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.type">Type</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="perDay"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.perDay">Per Day</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="perKM"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.perKM">Per KM</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="perDiver"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.perDiver">Per Diver</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="createdBy"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.createdBy">Created By</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="createdDate"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.createdDate">Created Date</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="lastModifiedBy"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.lastModifiedBy">Last Modified By</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="lastModifiedDate"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.lastModifiedDate">Last Modified Date</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="status"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.status">Status</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="vehicle.id"><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.vehicle">Vehicle</span> <span class="fa fa-sort"></span></th>
+            <th> Cost </th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let vehicleServiceCost of vehicleServiceCosts ;trackBy: trackId">
-                <td><a [routerLink]="['../vehicle-service-cost-vma', vehicleServiceCost.id ]">{{vehicleServiceCost.id}}</a></td>
                 <td>{{vehicleServiceCost.name}}</td>
                 <td jhiTranslate="{{'vehicleManagerApplicationApp.VehicleServiceCostType.' + vehicleServiceCost.type}}">{{vehicleServiceCost.type}}</td>
                 <td>{{vehicleServiceCost.perDay}}</td>
                 <td>{{vehicleServiceCost.perKM}}</td>
                 <td>{{vehicleServiceCost.perDiver}}</td>
-                <td>{{vehicleServiceCost.createdBy}}</td>
-                <td>{{vehicleServiceCost.createdDate | date:'medium'}}</td>
-                <td>{{vehicleServiceCost.lastModifiedBy}}</td>
-                <td>{{vehicleServiceCost.lastModifiedDate | date:'medium'}}</td>
-                <td jhiTranslate="{{'vehicleManagerApplicationApp.StatusType.' + vehicleServiceCost.status}}">{{vehicleServiceCost.status}}</td>
+                <td>xxx Euro</td>
                 <td>
                     <div *ngIf="vehicleServiceCost.vehicle">
                         <a [routerLink]="['../vehicle-vma', vehicleServiceCost.vehicle?.id ]" >{{vehicleServiceCost.vehicle?.id}}</a>

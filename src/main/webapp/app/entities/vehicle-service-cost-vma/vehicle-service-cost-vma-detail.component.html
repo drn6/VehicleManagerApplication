@@ -24,26 +24,6 @@
         <dd>
             <span>{{vehicleServiceCost.perDiver}}</span>
         </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.createdBy">Created By</span></dt>
-        <dd>
-            <span>{{vehicleServiceCost.createdBy}}</span>
-        </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.createdDate">Created Date</span></dt>
-        <dd>
-            <span>{{vehicleServiceCost.createdDate | date:'medium'}}</span>
-        </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.lastModifiedBy">Last Modified By</span></dt>
-        <dd>
-            <span>{{vehicleServiceCost.lastModifiedBy}}</span>
-        </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.lastModifiedDate">Last Modified Date</span></dt>
-        <dd>
-            <span>{{vehicleServiceCost.lastModifiedDate | date:'medium'}}</span>
-        </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.status">Status</span></dt>
-        <dd>
-            <span jhiTranslate="{{'vehicleManagerApplicationApp.StatusType.' + vehicleServiceCost.status}}">{{vehicleServiceCost.status}}</span>
-        </dd>
         <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.vehicle">Vehicle</span></dt>
         <dd>
             <div *ngIf="vehicleServiceCost.vehicle">

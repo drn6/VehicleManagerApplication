@@ -20,26 +20,6 @@
         <dd>
             <span>{{vehicleTaskDetails.endDateTime | date:'medium'}}</span>
         </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.createdBy">Created By</span></dt>
-        <dd>
-            <span>{{vehicleTaskDetails.createdBy}}</span>
-        </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.createdDate">Created Date</span></dt>
-        <dd>
-            <span>{{vehicleTaskDetails.createdDate | date:'medium'}}</span>
-        </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.lastModifiedBy">Last Modified By</span></dt>
-        <dd>
-            <span>{{vehicleTaskDetails.lastModifiedBy}}</span>
-        </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.lastModifiedDate">Last Modified Date</span></dt>
-        <dd>
-            <span>{{vehicleTaskDetails.lastModifiedDate | date:'medium'}}</span>
-        </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.status">Status</span></dt>
-        <dd>
-            <span jhiTranslate="{{'vehicleManagerApplicationApp.StatusType.' + vehicleTaskDetails.status}}">{{vehicleTaskDetails.status}}</span>
-        </dd>
         <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.vehicleTask">Vehicle Task</span></dt>
         <dd>
             <div *ngIf="vehicleTaskDetails.vehicleTask">

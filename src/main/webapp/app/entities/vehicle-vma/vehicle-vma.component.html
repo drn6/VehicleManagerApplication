@@ -16,29 +16,17 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span jhiTranslate="vehicleManagerApplicationApp.vehicle.name">Name</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="numberPlate"><span jhiTranslate="vehicleManagerApplicationApp.vehicle.numberPlate">Number Plate</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="numberOfPlace"><span jhiTranslate="vehicleManagerApplicationApp.vehicle.numberOfPlace">Number Of Place</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="createdBy"><span jhiTranslate="vehicleManagerApplicationApp.vehicle.createdBy">Created By</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="createdDate"><span jhiTranslate="vehicleManagerApplicationApp.vehicle.createdDate">Created Date</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="lastModifiedBy"><span jhiTranslate="vehicleManagerApplicationApp.vehicle.lastModifiedBy">Last Modified By</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="lastModifiedDate"><span jhiTranslate="vehicleManagerApplicationApp.vehicle.lastModifiedDate">Last Modified Date</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="status"><span jhiTranslate="vehicleManagerApplicationApp.vehicle.status">Status</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let vehicle of vehicles ;trackBy: trackId">
-                <td><a [routerLink]="['../vehicle-vma', vehicle.id ]">{{vehicle.id}}</a></td>
                 <td>{{vehicle.name}}</td>
                 <td>{{vehicle.numberPlate}}</td>
                 <td>{{vehicle.numberOfPlace}}</td>
-                <td>{{vehicle.createdBy}}</td>
-                <td>{{vehicle.createdDate | date:'medium'}}</td>
-                <td>{{vehicle.lastModifiedBy}}</td>
-                <td>{{vehicle.lastModifiedDate | date:'medium'}}</td>
-                <td jhiTranslate="{{'vehicleManagerApplicationApp.StatusType.' + vehicle.status}}">{{vehicle.status}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

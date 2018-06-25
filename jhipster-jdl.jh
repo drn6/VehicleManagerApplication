@@ -54,7 +54,7 @@ entity VehicleServiceCost {
  	type VehicleServiceCostType required,
     perDay Double required min(1),
     perKM Double required min(1),
-    perDiver Double required min(1),    
+    perDiver Double required min(1),
  	createdBy String,
     createdDate Instant,
     lastModifiedBy String,
@@ -100,7 +100,12 @@ relationship OneToMany {
      Vehicle{cost(name)} to VehicleServiceCost
      Vehicle{task(name)} to VehicleTask
 }
-
+relationship OneToMany {
+	 VehicleTask{detail(name)} to VehicleTaskDetails
+     VehicleTask{cost(name)} to Cost
+     Vehicle{cost(name)} to VehicleServiceCost
+     Vehicle{task(name)} to VehicleTask
+}
 // Set pagination options
 paginate * with pagination
 // Set service options to all except few

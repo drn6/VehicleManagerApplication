@@ -21,7 +21,7 @@ import fr.drn.app.vma.domain.enumeration.StatusType;
  */
 @Entity
 @Table(name = "vehicle_task")
-public class VehicleTask implements Serializable {
+public class VehicleTask  extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -56,18 +56,6 @@ public class VehicleTask implements Serializable {
     @NotNull
     @Column(name = "end_date_time", nullable = false)
     private ZonedDateTime endDateTime;
-
-    @Column(name = "created_by")
-    private String createdBy;
-
-    @Column(name = "created_date")
-    private Instant createdDate;
-
-    @Column(name = "last_modified_by")
-    private String lastModifiedBy;
-
-    @Column(name = "last_modified_date")
-    private Instant lastModifiedDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
@@ -175,58 +163,6 @@ public class VehicleTask implements Serializable {
 
     public void setEndDateTime(ZonedDateTime endDateTime) {
         this.endDateTime = endDateTime;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public VehicleTask createdBy(String createdBy) {
-        this.createdBy = createdBy;
-        return this;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Instant getCreatedDate() {
-        return createdDate;
-    }
-
-    public VehicleTask createdDate(Instant createdDate) {
-        this.createdDate = createdDate;
-        return this;
-    }
-
-    public void setCreatedDate(Instant createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public VehicleTask lastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-        return this;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public Instant getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public VehicleTask lastModifiedDate(Instant lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-        return this;
-    }
-
-    public void setLastModifiedDate(Instant lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
     }
 
     public StatusType getStatus() {

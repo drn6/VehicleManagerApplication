@@ -108,38 +108,6 @@
                 </small>
             </div>
         </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleTask.createdBy" for="field_createdBy">Created By</label>
-            <input type="text" class="form-control" name="createdBy" id="field_createdBy"
-                [(ngModel)]="vehicleTask.createdBy" />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleTask.createdDate" for="field_createdDate">Created Date</label>
-            <div class="d-flex">
-                <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" [(ngModel)]="vehicleTask.createdDate"
-                />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleTask.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
-            <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
-                [(ngModel)]="vehicleTask.lastModifiedBy" />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleTask.lastModifiedDate" for="field_lastModifiedDate">Last Modified Date</label>
-            <div class="d-flex">
-                <input id="field_lastModifiedDate" type="datetime-local" class="form-control" name="lastModifiedDate" [(ngModel)]="vehicleTask.lastModifiedDate"
-                />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleTask.status" for="field_status">Status</label>
-            <select class="form-control" name="status" [(ngModel)]="vehicleTask.status" id="field_status" >
-                <option value="ENABLED">{{'vehicleManagerApplicationApp.StatusType.ENABLED' | translate}}</option>
-                <option value="DISABLED">{{'vehicleManagerApplicationApp.StatusType.DISABLED' | translate}}</option>
-                <option value="DELETED">{{'vehicleManagerApplicationApp.StatusType.DELETED' | translate}}</option>
-            </select>
-        </div>
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleTask.vehicle" for="field_vehicle">Vehicle</label>
