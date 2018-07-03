@@ -1,125 +1,156 @@
 <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
 
     <div class="modal-header">
-        <h4 class="modal-title" id="myVehicleTaskLabel" jhiTranslate="vehicleManagerApplicationApp.vehicleTask.home.createOrEditLabel">Create or edit a Vehicle Task</h4>
+        <h4 class="modal-title" id="myVehicleTaskLabel"
+            jhiTranslate="vehicleManagerApplicationApp.vehicleTask.home.createOrEditLabel">Create or edit a Vehicle
+            Task</h4>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                (click)="clear()">&times;</button>
+                (click)="clear()">&times;
+        </button>
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
         <div class="form-group" [hidden]="!vehicleTask.id">
             <label for="id" jhiTranslate="global.field.id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
-                   [(ngModel)]="vehicleTask.id" readonly />
+                   [(ngModel)]="vehicleTask.id" readonly/>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleTask.name" for="field_name">Name</label>
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleTask.name"
+                   for="field_name">Name</label>
             <input type="text" class="form-control" name="name" id="field_name"
-                [(ngModel)]="vehicleTask.name" required maxlength="100"/>
+                   [(ngModel)]="vehicleTask.name" required maxlength="100"/>
             <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
                 <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
+                       [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                    This field is required.
                 </small>
                 <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.name?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
-                   This field cannot be longer than 100 characters.
+                       [hidden]="!editForm.controls.name?.errors?.maxlength" jhiTranslate="entity.validation.maxlength"
+                       translateValues="{ max: 100 }">
+                    This field cannot be longer than 100 characters.
                 </small>
             </div>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleTask.type" for="field_type">Type</label>
-            <select class="form-control" name="type" [(ngModel)]="vehicleTask.type" id="field_type"  required>
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleTask.type"
+                   for="field_type">Type</label>
+            <select class="form-control" name="type" [(ngModel)]="vehicleTask.type" id="field_type" required>
                 <option value="JOURNEY">{{'vehicleManagerApplicationApp.VehicleTaskType.JOURNEY' | translate}}</option>
-                <option value="MAINTENANCE">{{'vehicleManagerApplicationApp.VehicleTaskType.MAINTENANCE' | translate}}</option>
+                <option value="MAINTENANCE">{{'vehicleManagerApplicationApp.VehicleTaskType.MAINTENANCE' | translate}}
+                </option>
             </select>
             <div [hidden]="!(editForm.controls.type?.dirty && editForm.controls.type?.invalid)">
                 <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.type?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
+                       [hidden]="!editForm.controls.type?.errors?.required" jhiTranslate="entity.validation.required">
+                    This field is required.
                 </small>
             </div>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleTask.description" for="field_description">Description</label>
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleTask.description"
+                   for="field_description">Description</label>
             <input type="text" class="form-control" name="description" id="field_description"
-                [(ngModel)]="vehicleTask.description" required/>
+                   [(ngModel)]="vehicleTask.description" required/>
             <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
                 <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.description?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
+                       [hidden]="!editForm.controls.description?.errors?.required"
+                       jhiTranslate="entity.validation.required">
+                    This field is required.
                 </small>
             </div>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleTask.maxDrivers" for="field_maxDrivers">Max Drivers</label>
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleTask.maxDrivers"
+                   for="field_maxDrivers">Max Drivers</label>
             <input type="number" class="form-control" name="maxDrivers" id="field_maxDrivers"
-                [(ngModel)]="vehicleTask.maxDrivers" required min="1" max="3"/>
+                   [(ngModel)]="vehicleTask.maxDrivers" required min="1" max="3"/>
             <div [hidden]="!(editForm.controls.maxDrivers?.dirty && editForm.controls.maxDrivers?.invalid)">
                 <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.maxDrivers?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
+                       [hidden]="!editForm.controls.maxDrivers?.errors?.required"
+                       jhiTranslate="entity.validation.required">
+                    This field is required.
                 </small>
                 <small class="form-text text-danger"
-                    [hidden]="!editForm.controls.maxDrivers?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 1 }">
+                       [hidden]="!editForm.controls.maxDrivers?.errors?.min" jhiTranslate="entity.validation.min"
+                       translateValues="{ min: 1 }">
                     This field should be at least 1.
                 </small>
                 <small class="form-text text-danger"
-                    [hidden]="!editForm.controls.maxDrivers?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 3 }">
+                       [hidden]="!editForm.controls.maxDrivers?.errors?.max" jhiTranslate="entity.validation.max"
+                       translateValues="{ max: 3 }">
                     This field cannot be more than 3.
                 </small>
                 <small class="form-text text-danger"
-                    [hidden]="!editForm.controls.maxDrivers?.errors?.number" jhiTranslate="entity.validation.number">
+                       [hidden]="!editForm.controls.maxDrivers?.errors?.number" jhiTranslate="entity.validation.number">
                     This field should be a number.
                 </small>
             </div>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleTask.startDateTime" for="field_startDateTime">Start Date Time</label>
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleTask.startDateTime"
+                   for="field_startDateTime">Start Date Time</label>
             <div class="d-flex">
-                <input id="field_startDateTime" type="datetime-local" class="form-control" name="startDateTime" [(ngModel)]="vehicleTask.startDateTime"
-                required/>
+                <input id="field_startDateTime" type="datetime-local" class="form-control" name="startDateTime"
+                       [(ngModel)]="vehicleTask.startDateTime"
+                       (change)="onDateChange()"
+                       required/>
             </div>
             <div [hidden]="!(editForm.controls.startDateTime?.dirty && editForm.controls.startDateTime?.invalid)">
                 <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.startDateTime?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
+                       [hidden]="!editForm.controls.startDateTime?.errors?.required"
+                       jhiTranslate="entity.validation.required">
+                    This field is required.
                 </small>
                 <small class="form-text text-danger"
-                    [hidden]="!editForm.controls.startDateTime?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                       [hidden]="!editForm.controls.startDateTime?.errors?.ZonedDateTimelocal"
+                       jhiTranslate="entity.validation.ZonedDateTimelocal">
                     This field should be a date and time.
                 </small>
             </div>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleTask.endDateTime" for="field_endDateTime">End Date Time</label>
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleTask.endDateTime"
+                   for="field_endDateTime">End Date Time</label>
             <div class="d-flex">
-                <input id="field_endDateTime" type="datetime-local" class="form-control" name="endDateTime" [(ngModel)]="vehicleTask.endDateTime"
-                required/>
+                <input id="field_endDateTime" type="datetime-local" class="form-control" name="endDateTime"
+                       [(ngModel)]="vehicleTask.endDateTime"
+                       (change)="onDateChange()"
+                       required/>
             </div>
             <div [hidden]="!(editForm.controls.endDateTime?.dirty && editForm.controls.endDateTime?.invalid)">
                 <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.endDateTime?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
+                       [hidden]="!editForm.controls.endDateTime?.errors?.required"
+                       jhiTranslate="entity.validation.required">
+                    This field is required.
                 </small>
                 <small class="form-text text-danger"
-                    [hidden]="!editForm.controls.endDateTime?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                       [hidden]="!editForm.controls.endDateTime?.errors?.ZonedDateTimelocal"
+                       jhiTranslate="entity.validation.ZonedDateTimelocal">
                     This field should be a date and time.
                 </small>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleTask.vehicle" for="field_vehicle">Vehicle</label>
-            <select class="form-control" id="field_vehicle" name="vehicle" [(ngModel)]="vehicleTask.vehicle" >
+            <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleTask.vehicle"
+                   for="field_vehicle">Vehicle</label>
+            <select class="form-control" id="field_vehicle" name="vehicle" [(ngModel)]="vehicleTask.vehicle">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="vehicleOption.id === vehicleTask.vehicle?.id ? vehicleTask.vehicle : vehicleOption" *ngFor="let vehicleOption of vehicles; trackBy: trackVehicleById">{{vehicleOption.id}}</option>
+                <option [ngValue]="vehicleOption.id === vehicleTask.vehicle?.id ? vehicleTask.vehicle : vehicleOption"
+                        *ngFor="let vehicleOption of vehicles; trackBy: trackVehicleById">{{vehicleOption.name}}--
+                    (<span
+                        jhiTranslate="vehicleManagerApplicationApp.vehicle.numberOfPlace"></span>:{{vehicleOption.numberOfPlace}})
+                </option>
             </select>
         </div>
         <div class="form-group">
             <label jhiTranslate="vehicleManagerApplicationApp.vehicleTask.driver" for="field_driver">Driver</label>
             <select class="form-control" id="field_driver" multiple name="driver" [(ngModel)]="vehicleTask.drivers">
-                <option [ngValue]="getSelected(vehicleTask.drivers, driverOption)" *ngFor="let driverOption of drivers; trackBy: trackDriverById">{{driverOption.firstName}}</option>
+                <option [ngValue]="getSelected(vehicleTask.drivers, driverOption)"
+                        *ngFor="let driverOption of drivers; trackBy: trackDriverById">{{driverOption.firstName}}
+                    {{driverOption.lastName}}
+                </option>
             </select>
         </div>
     </div>

@@ -2,6 +2,7 @@ package fr.drn.app.vma.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import fr.drn.app.vma.domain.Vehicle;
+import fr.drn.app.vma.security.AuthoritiesConstants;
 import fr.drn.app.vma.service.VehicleService;
 import fr.drn.app.vma.web.rest.errors.BadRequestAlertException;
 import fr.drn.app.vma.web.rest.util.HeaderUtil;
@@ -14,12 +15,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +53,7 @@ public class VehicleResource {
      */
     @PostMapping("/vehicles")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Vehicle> createVehicle(@Valid @RequestBody Vehicle vehicle) throws URISyntaxException {
         log.debug("REST request to save Vehicle : {}", vehicle);
         if (vehicle.getId() != null) {
@@ -71,6 +76,7 @@ public class VehicleResource {
      */
     @PutMapping("/vehicles")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Vehicle> updateVehicle(@Valid @RequestBody Vehicle vehicle) throws URISyntaxException {
         log.debug("REST request to update Vehicle : {}", vehicle);
         if (vehicle.getId() == null) {
@@ -90,9 +96,17 @@ public class VehicleResource {
      */
     @GetMapping("/vehicles")
     @Timed
-    public ResponseEntity<List<Vehicle>> getAllVehicles(Pageable pageable) {
+    @Secured(AuthoritiesConstants.ADMIN)
+    public ResponseEntity<List<Vehicle>> getAllVehicles(@RequestParam(defaultValue = "", required = false) LocalDateTime startDateTime, @RequestParam(defaultValue = "", required = false) LocalDateTime endDateTime, Pageable pageable) {
         log.debug("REST request to get a page of Vehicles");
-        Page<Vehicle> page = vehicleService.findAll(pageable);
+        Page<Vehicle> page = null;
+
+        if (startDateTime != null || endDateTime != null) {
+            page = vehicleService.findAll(startDateTime.atZone(ZoneId.systemDefault()),endDateTime.atZone(ZoneId.systemDefault()), pageable);
+        } else {
+            page = vehicleService.findAll(pageable);
+        }
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/vehicles");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -105,6 +119,7 @@ public class VehicleResource {
      */
     @GetMapping("/vehicles/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Vehicle> getVehicle(@PathVariable Long id) {
         log.debug("REST request to get Vehicle : {}", id);
         Vehicle vehicle = vehicleService.findOne(id);
@@ -119,6 +134,7 @@ public class VehicleResource {
      */
     @DeleteMapping("/vehicles/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteVehicle(@PathVariable Long id) {
         log.debug("REST request to delete Vehicle : {}", id);
         vehicleService.delete(id);

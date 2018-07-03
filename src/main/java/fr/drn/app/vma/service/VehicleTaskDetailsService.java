@@ -4,6 +4,8 @@ import fr.drn.app.vma.domain.VehicleTaskDetails;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * Service Interface for managing VehicleTaskDetails.
  */
@@ -24,6 +26,12 @@ public interface VehicleTaskDetailsService {
      * @return the list of entities
      */
     Page<VehicleTaskDetails> findAll(Pageable pageable);
+
+    /**
+     * @param taskId       task id
+     * @return the list of entities filter by task id
+     */
+    List<VehicleTaskDetails> findAllByTaskId(Long taskId);
 
     /**
      * Get the "id" vehicleTaskDetails.

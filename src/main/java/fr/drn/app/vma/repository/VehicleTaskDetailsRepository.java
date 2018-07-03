@@ -1,9 +1,10 @@
 package fr.drn.app.vma.repository;
 
 import fr.drn.app.vma.domain.VehicleTaskDetails;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import org.springframework.data.jpa.repository.*;
+import java.util.List;
 
 
 /**
@@ -13,4 +14,5 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface VehicleTaskDetailsRepository extends JpaRepository<VehicleTaskDetails, Long> {
 
+    List<VehicleTaskDetails> findByVehicleTaskId(Long id);
 }

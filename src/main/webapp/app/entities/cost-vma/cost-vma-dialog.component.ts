@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+import {Observable} from 'rxjs/Observable';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
 
-import { CostVma } from './cost-vma.model';
-import { CostVmaPopupService } from './cost-vma-popup.service';
-import { CostVmaService } from './cost-vma.service';
-import { VehicleTaskVma, VehicleTaskVmaService } from '../vehicle-task-vma';
+import {CostVma} from './cost-vma.model';
+import {CostVmaPopupService} from './cost-vma-popup.service';
+import {CostVmaService} from './cost-vma.service';
+import {VehicleTaskVma, VehicleTaskVmaService} from '../vehicle-task-vma';
 
 @Component({
     selector: 'jhi-cost-vma-dialog',
@@ -34,7 +34,9 @@ export class CostVmaDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.vehicleTaskService.query()
-            .subscribe((res: HttpResponse<VehicleTaskVma[]>) => { this.vehicletasks = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+            .subscribe((res: HttpResponse<VehicleTaskVma[]>) => {
+                this.vehicletasks = res.body;
+            }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -58,7 +60,8 @@ export class CostVmaDialogComponent implements OnInit {
     }
 
     private onSaveSuccess(result: CostVma) {
-        this.eventManager.broadcast({ name: 'costListModification', content: 'OK'});
+        this.eventManager.broadcast({name: 'costListModification', content: 'OK'});
+        this.eventManager.broadcast({name: 'vehicleTaskListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }
@@ -87,11 +90,17 @@ export class CostVmaPopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private costPopupService: CostVmaPopupService
-    ) {}
+    ) {
+    }
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
-            if ( params['id'] ) {
+            debugger;
+            if (params['taskId']) {
+                this.costPopupService
+                    .open(CostVmaDialogComponent as Component, (params['id']) ? params['id'] : null, params['taskId']);
+            }
+            else if (params['id']) {
                 this.costPopupService
                     .open(CostVmaDialogComponent as Component, params['id']);
             } else {

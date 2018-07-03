@@ -2,6 +2,7 @@ package fr.drn.app.vma.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import fr.drn.app.vma.domain.Cost;
+import fr.drn.app.vma.security.AuthoritiesConstants;
 import fr.drn.app.vma.service.CostService;
 import fr.drn.app.vma.web.rest.errors.BadRequestAlertException;
 import fr.drn.app.vma.web.rest.util.HeaderUtil;
@@ -14,12 +15,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +50,7 @@ public class CostResource {
      */
     @PostMapping("/costs")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Cost> createCost(@Valid @RequestBody Cost cost) throws URISyntaxException {
         log.debug("REST request to save Cost : {}", cost);
         if (cost.getId() != null) {
@@ -71,6 +73,7 @@ public class CostResource {
      */
     @PutMapping("/costs")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Cost> updateCost(@Valid @RequestBody Cost cost) throws URISyntaxException {
         log.debug("REST request to update Cost : {}", cost);
         if (cost.getId() == null) {
@@ -90,6 +93,7 @@ public class CostResource {
      */
     @GetMapping("/costs")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<List<Cost>> getAllCosts(Pageable pageable) {
         log.debug("REST request to get a page of Costs");
         Page<Cost> page = costService.findAll(pageable);
@@ -100,11 +104,27 @@ public class CostResource {
     /**
      * GET  /costs/:id : get the "id" cost.
      *
+     * @param taskId the id of the cost to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the cost, or with status 404 (Not Found)
+     */
+    @GetMapping("/costs/task/{taskId}")
+    @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
+    public ResponseEntity<List<Cost>> getCostByTaskId(@PathVariable Long taskId) {
+        log.debug("REST request to get Cost : {}", taskId);
+        List<Cost> costs = costService.findAllByTaskId(taskId);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(costs));
+    }
+
+    /**
+     * GET  /costs/:id : get the "id" cost.
+     *
      * @param id the id of the cost to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the cost, or with status 404 (Not Found)
      */
     @GetMapping("/costs/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Cost> getCost(@PathVariable Long id) {
         log.debug("REST request to get Cost : {}", id);
         Cost cost = costService.findOne(id);
@@ -119,6 +139,7 @@ public class CostResource {
      */
     @DeleteMapping("/costs/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteCost(@PathVariable Long id) {
         log.debug("REST request to delete Cost : {}", id);
         costService.delete(id);

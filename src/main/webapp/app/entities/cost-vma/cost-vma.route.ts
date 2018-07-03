@@ -1,17 +1,18 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil } from 'ng-jhipster';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes} from '@angular/router';
+import {JhiPaginationUtil} from 'ng-jhipster';
 
-import { UserRouteAccessService } from '../../shared';
-import { CostVmaComponent } from './cost-vma.component';
-import { CostVmaDetailComponent } from './cost-vma-detail.component';
-import { CostVmaPopupComponent } from './cost-vma-dialog.component';
-import { CostVmaDeletePopupComponent } from './cost-vma-delete-dialog.component';
+import {UserRouteAccessService} from '../../shared';
+import {CostVmaComponent} from './cost-vma.component';
+import {CostVmaDetailComponent} from './cost-vma-detail.component';
+import {CostVmaPopupComponent} from './cost-vma-dialog.component';
+import {CostVmaDeletePopupComponent} from './cost-vma-delete-dialog.component';
 
 @Injectable()
 export class CostVmaResolvePagingParams implements Resolve<any> {
 
-    constructor(private paginationUtil: JhiPaginationUtil) {}
+    constructor(private paginationUtil: JhiPaginationUtil) {
+    }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const page = route.queryParams['page'] ? route.queryParams['page'] : '1';
@@ -20,7 +21,7 @@ export class CostVmaResolvePagingParams implements Resolve<any> {
             page: this.paginationUtil.parsePage(page),
             predicate: this.paginationUtil.parsePredicate(sort),
             ascending: this.paginationUtil.parseAscending(sort)
-      };
+        };
     }
 }
 
@@ -59,7 +60,27 @@ export const costPopupRoute: Routes = [
         outlet: 'popup'
     },
     {
+        path: 'cost-vma-new/task/:taskId',
+        component: CostVmaPopupComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'vehicleManagerApplicationApp.cost.home.title'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
+    {
         path: 'cost-vma/:id/edit',
+        component: CostVmaPopupComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'vehicleManagerApplicationApp.cost.home.title'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
+    {
+        path: 'cost-vma/:id/edit/task/:taskId',
         component: CostVmaPopupComponent,
         data: {
             authorities: ['ROLE_USER'],

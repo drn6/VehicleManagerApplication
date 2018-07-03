@@ -13,10 +13,10 @@ import {VehicleVma, VehicleVmaService} from '../vehicle-vma';
 import {DriverVma, DriverVmaService} from '../driver-vma';
 
 @Component({
-    selector: 'jhi-vehicle-task-vma-dialog',
-    templateUrl: './vehicle-task-vma-dialog.component.html'
+    selector: 'jhi-vehicle-task-driver-vma-dialog',
+    templateUrl: './vehicle-task-driver-vma-dialog.component.html'
 })
-export class VehicleTaskVmaDialogComponent implements OnInit {
+export class VehicleTaskDriverVmaDialogComponent implements OnInit {
 
     vehicleTask: VehicleTaskVma;
     isSaving: boolean;
@@ -47,27 +47,16 @@ export class VehicleTaskVmaDialogComponent implements OnInit {
             }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
+    addOrRemove(taskId,driverId,remove){
+        console.log("remove",remove);
+        this.subscribeToSaveResponse(
+            this.vehicleTaskService.addOrRemoveDriver(taskId,driverId,remove));
+    }
+
     clear() {
         this.activeModal.dismiss('cancel');
     }
 
-    onDateChange() {
-        this.vehicleService.query(null, this.vehicleTask.startDateTime, this.vehicleTask.endDateTime)
-            .subscribe((res: HttpResponse<VehicleVma[]>) => {
-                this.vehicles = res.body;
-            }, (res: HttpErrorResponse) => this.onError(res.message));
-    }
-
-    save() {
-        this.isSaving = true;
-        if (this.vehicleTask.id !== undefined) {
-            this.subscribeToSaveResponse(
-                this.vehicleTaskService.update(this.vehicleTask));
-        } else {
-            this.subscribeToSaveResponse(
-                this.vehicleTaskService.create(this.vehicleTask));
-        }
-    }
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<VehicleTaskVma>>) {
         result.subscribe((res: HttpResponse<VehicleTaskVma>) =>
@@ -85,7 +74,7 @@ export class VehicleTaskVmaDialogComponent implements OnInit {
     }
 
     private onError(error: any) {
-        this.jhiAlertService.error(error.message, null, null);
+        this.jhiAlertService.error('notallow', null, null);
     }
 
     trackVehicleById(index: number, item: VehicleVma) {
@@ -100,19 +89,19 @@ export class VehicleTaskVmaDialogComponent implements OnInit {
         if (selectedVals) {
             for (let i = 0; i < selectedVals.length; i++) {
                 if (option.id === selectedVals[i].id) {
-                    return selectedVals[i];
+                    return true;
                 }
             }
         }
-        return option;
+        return false
     }
 }
 
 @Component({
-    selector: 'jhi-vehicle-task-vma-popup',
+    selector: 'jhi-vehicle-task-driver-vma-popup',
     template: ''
 })
-export class VehicleTaskVmaPopupComponent implements OnInit, OnDestroy {
+export class VehicleTaskDriverVmaPopupComponent implements OnInit, OnDestroy {
 
     routeSub: any;
 
@@ -126,10 +115,10 @@ export class VehicleTaskVmaPopupComponent implements OnInit, OnDestroy {
         this.routeSub = this.route.params.subscribe((params) => {
             if (params['id']) {
                 this.vehicleTaskPopupService
-                    .open(VehicleTaskVmaDialogComponent as Component, params['id']);
+                    .open(VehicleTaskDriverVmaDialogComponent as Component, params['id']);
             } else {
                 this.vehicleTaskPopupService
-                    .open(VehicleTaskVmaDialogComponent as Component);
+                    .open(VehicleTaskDriverVmaDialogComponent as Component);
             }
         });
     }

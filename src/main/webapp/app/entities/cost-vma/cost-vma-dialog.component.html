@@ -59,11 +59,14 @@
                 </small>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" *ngIf="!cost.vehicleTask">
             <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.cost.vehicleTask" for="field_vehicleTask">Vehicle Task</label>
             <select class="form-control" id="field_vehicleTask" name="vehicleTask" [(ngModel)]="cost.vehicleTask" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="vehicleTaskOption.id === cost.vehicleTask?.id ? cost.vehicleTask : vehicleTaskOption" *ngFor="let vehicleTaskOption of vehicletasks; trackBy: trackVehicleTaskById">{{vehicleTaskOption.id}}</option>
+                <option [ngValue]="vehicleTaskOption.id === cost.vehicleTask?.id ? cost.vehicleTask : vehicleTaskOption" *ngFor="let vehicleTaskOption of vehicletasks; trackBy: trackVehicleTaskById">{{vehicleTaskOption.name}}
+                    ({{vehicleTaskOption.startDateTime | date:'short'}} -
+                    {{vehicleTaskOption.endDateTime | date:'short'}})
+                </option>
             </select>
         </div>
     </div>

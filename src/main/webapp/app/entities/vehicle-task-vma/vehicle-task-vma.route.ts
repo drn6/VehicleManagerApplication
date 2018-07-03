@@ -7,6 +7,7 @@ import { VehicleTaskVmaComponent } from './vehicle-task-vma.component';
 import { VehicleTaskVmaDetailComponent } from './vehicle-task-vma-detail.component';
 import { VehicleTaskVmaPopupComponent } from './vehicle-task-vma-dialog.component';
 import { VehicleTaskVmaDeletePopupComponent } from './vehicle-task-vma-delete-dialog.component';
+import {VehicleTaskDriverVmaPopupComponent} from "./vehicle-task-driver-vma-dialog.component";
 
 @Injectable()
 export class VehicleTaskVmaResolvePagingParams implements Resolve<any> {
@@ -58,6 +59,17 @@ export const vehicleTaskPopupRoute: Routes = [
         canActivate: [UserRouteAccessService],
         outlet: 'popup'
     },
+    {
+        path: 'vehicle-task-vma/:id/addDriver',
+        component: VehicleTaskDriverVmaPopupComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'vehicleManagerApplicationApp.vehicleTask.home.addDriverTitle'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
+
     {
         path: 'vehicle-task-vma/:id/edit',
         component: VehicleTaskVmaPopupComponent,

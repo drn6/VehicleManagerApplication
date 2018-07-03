@@ -1,11 +1,11 @@
-
 {
     "vehicleManagerApplicationApp": {
-        "vehicleTask" : {
+        "vehicleTask": {
             "home": {
                 "title": "Vehicle Tasks",
                 "createLabel": "Create a new Vehicle Task",
-                "createOrEditLabel": "Create or edit a Vehicle Task"
+                "createOrEditLabel": "Create or edit a Vehicle Task",
+                "addDriverTitle": "Add Or Remove new driver"
             },
             "created": "A new Vehicle Task is created with identifier {{ param }}",
             "updated": "A Vehicle Task is updated with identifier {{ param }}",
@@ -28,9 +28,9 @@
             "lastModifiedDate": "Last Modified Date",
             "status": "Status",
             "vehicle": "Vehicle",
-            "detail": "Detail",
             "cost": "Cost",
-            "driver": "Driver"
+            "driver": "Driver",
+            "drivers": "Drivers"
         }
     }
 }

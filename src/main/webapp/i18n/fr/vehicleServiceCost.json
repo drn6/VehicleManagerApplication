@@ -11,20 +11,20 @@
             "perDriver":"Tarif par chauffeur",
             "total":"Total",
             "home": {
-                "title": "VehicleServiceCosts",
-                "createLabel": "Créer un nouveau Vehicle Service Cost",
-                "createOrEditLabel": "Créer ou éditer un Vehicle Service Cost"
+                "title": "Coûts de service du véhicule",
+                "createLabel": "Créer un nouveau coût de service du véhicule",
+                "createOrEditLabel": "Créer ou éditer un coût de service du véhicule"
             },
-            "created": "Un nouveau Vehicle Service Cost a été créé avec l'identifiant {{ param }}",
-            "updated": "Le Vehicle Service Cost avec l'identifiant {{ param }} a été mis à jour",
-            "deleted": "Le Vehicle Service Cost avec l'identifiant {{ param }} a été supprimé",
+            "created": "Un nouveau coût de service du véhicule a été créé avec l'identifiant {{ param }}",
+            "updated": "Le coût de service du véhicule avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le coût de service du véhicule avec l'identifiant {{ param }} a été supprimé",
             "delete": {
                 "question": "Etes-vous certain de vouloir supprimer le Vehicle Service Cost {{ id }} ?"
             },
             "detail": {
-                "title": "Vehicle Service Cost"
+                "title": "Coût de service du véhicule"
             },
-            "name": "Name",
+            "name": "Titre",
             "type": "Type",
             "perDay": "Per Day",
             "perKM": "Per KM",

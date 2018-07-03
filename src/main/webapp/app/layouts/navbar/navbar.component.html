@@ -28,7 +28,7 @@
                         </span>
                     </span>
                 </a>
-                <ul class="dropdown-menu" ngbDropdownMenu>
+                <ul class="dropdown-menu" ngbDropdownMenu *jhiHasAnyAuthority="'ROLE_ADMIN'" >
                     <li>
                         <a class="dropdown-item" routerLink="vehicle-vma" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
@@ -41,12 +41,12 @@
                             <span jhiTranslate="global.menu.entities.vehicleTaskVma">Vehicle Task Vma</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="vehicle-task-details-vma" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.vehicleTaskDetailsVma">Vehicle Task Details Vma</span>
-                        </a>
-                    </li>
+                    <!--<li>-->
+                        <!--<a class="dropdown-item" routerLink="vehicle-task-details-vma" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+                            <!--<i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>-->
+                            <!--<span jhiTranslate="global.menu.entities.vehicleTaskDetailsVma">Vehicle Task Details Vma</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
                     <li>
                         <a class="dropdown-item" routerLink="driver-vma" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
@@ -59,12 +59,12 @@
                             <span jhiTranslate="global.menu.entities.vehicleServiceCostVma">Vehicle Service Cost Vma</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="cost-vma" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.costVma">Cost Vma</span>
-                        </a>
-                    </li>
+                    <!--<li>-->
+                        <!--<a class="dropdown-item" routerLink="cost-vma" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+                            <!--<i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>-->
+                            <!--<span jhiTranslate="global.menu.entities.costVma">Cost Vma</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>

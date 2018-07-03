@@ -4,6 +4,8 @@ import fr.drn.app.vma.domain.Vehicle;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.time.ZonedDateTime;
+
 /**
  * Service Interface for managing Vehicle.
  */
@@ -24,6 +26,8 @@ public interface VehicleService {
      * @return the list of entities
      */
     Page<Vehicle> findAll(Pageable pageable);
+
+    Page<Vehicle> findAll(ZonedDateTime startDateTime, ZonedDateTime endDateTime, Pageable pageable);
 
     /**
      * Get the "id" vehicle.

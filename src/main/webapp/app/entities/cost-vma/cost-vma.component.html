@@ -25,13 +25,13 @@
             </thead>
             <tbody>
             <tr *ngFor="let cost of costs ;trackBy: trackId">
-                <td><a [routerLink]="['../cost-vma', cost.id ]">{{cost.id}}</a></td>
                 <td>{{cost.name}}</td>
                 <td jhiTranslate="{{'vehicleManagerApplicationApp.CostType.' + cost.type}}">{{cost.type}}</td>
-                <td>{{cost.cost}}</td>
+                <td>{{cost.cost}}€</td>
                 <td>
                     <div *ngIf="cost.vehicleTask">
-                        <a [routerLink]="['../vehicle-task-vma', cost.vehicleTask?.id ]" >{{cost.vehicleTask?.id}}</a>
+                        <a [routerLink]="['../vehicle-task-vma', cost.vehicleTask?.id ]" >{{cost.vehicleTask?.name}}  ({{cost.vehicleTask.startDateTime | date:'short'}} -
+                            {{cost.vehicleTask.endDateTime | date:'short'}})</a>
                     </div>
                 </td>
                 <td class="text-right">

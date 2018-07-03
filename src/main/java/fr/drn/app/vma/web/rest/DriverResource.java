@@ -2,6 +2,7 @@ package fr.drn.app.vma.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import fr.drn.app.vma.domain.Driver;
+import fr.drn.app.vma.security.AuthoritiesConstants;
 import fr.drn.app.vma.service.DriverService;
 import fr.drn.app.vma.web.rest.errors.BadRequestAlertException;
 import fr.drn.app.vma.web.rest.util.HeaderUtil;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -49,6 +51,7 @@ public class DriverResource {
      */
     @PostMapping("/drivers")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Driver> createDriver(@Valid @RequestBody Driver driver) throws URISyntaxException {
         log.debug("REST request to save Driver : {}", driver);
         if (driver.getId() != null) {
@@ -71,6 +74,7 @@ public class DriverResource {
      */
     @PutMapping("/drivers")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Driver> updateDriver(@Valid @RequestBody Driver driver) throws URISyntaxException {
         log.debug("REST request to update Driver : {}", driver);
         if (driver.getId() == null) {
@@ -90,6 +94,7 @@ public class DriverResource {
      */
     @GetMapping("/drivers")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<List<Driver>> getAllDrivers(Pageable pageable) {
         log.debug("REST request to get a page of Drivers");
         Page<Driver> page = driverService.findAll(pageable);
@@ -105,6 +110,7 @@ public class DriverResource {
      */
     @GetMapping("/drivers/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Driver> getDriver(@PathVariable Long id) {
         log.debug("REST request to get Driver : {}", id);
         Driver driver = driverService.findOne(id);
@@ -119,6 +125,7 @@ public class DriverResource {
      */
     @DeleteMapping("/drivers/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteDriver(@PathVariable Long id) {
         log.debug("REST request to delete Driver : {}", id);
         driverService.delete(id);

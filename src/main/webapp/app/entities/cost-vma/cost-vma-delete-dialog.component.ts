@@ -33,6 +33,7 @@ export class CostVmaDeleteDialogComponent {
                 name: 'costListModification',
                 content: 'Deleted an cost'
             });
+            this.eventManager.broadcast({name: 'vehicleTaskListModification', content: 'OK'});
             this.activeModal.dismiss(true);
         });
     }

@@ -1,22 +1,21 @@
-
 {
     "vehicleManagerApplicationApp": {
-        "vehicleTaskDetails" : {
+        "vehicleTaskDetails": {
             "home": {
-                "title": "VehicleTaskDetails",
-                "createLabel": "Créer un nouveau Vehicle Task Details",
-                "createOrEditLabel": "Créer ou éditer un Vehicle Task Details"
+                "title": "Liste des détails des tâches des véhicules",
+                "createLabel": "Créer un nouveau détails de la tâche du véhicule",
+                "createOrEditLabel": "Créer ou éditer un détails de la tâche du véhicule"
             },
-            "created": "Un nouveau Vehicle Task Details a été créé avec l'identifiant {{ param }}",
-            "updated": "Le Vehicle Task Details avec l'identifiant {{ param }} a été mis à jour",
-            "deleted": "Le Vehicle Task Details avec l'identifiant {{ param }} a été supprimé",
+            "created": "Un nouveau détails de la tâche du véhicule a été créé avec l'identifiant {{ param }}",
+            "updated": "Le détails de la tâche du véhicule avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le détails de la tâche du véhicule avec l'identifiant {{ param }} a été supprimé",
             "delete": {
                 "question": "Etes-vous certain de vouloir supprimer le Vehicle Task Details {{ id }} ?"
             },
             "detail": {
-                "title": "Vehicle Task Details"
+                "title": "Détails de la tâche du véhicule"
             },
-            "name": "Name",
+            "name": "Titre",
             "description": "Description",
             "startDateTime": "Start Date Time",
             "endDateTime": "End Date Time",
@@ -25,7 +24,7 @@
             "lastModifiedBy": "Last Modified By",
             "lastModifiedDate": "Last Modified Date",
             "status": "Status",
-            "vehicleTask": "Vehicle Task"
+            "vehicleTask": "Tâche du véhicule"
         }
     }
 }

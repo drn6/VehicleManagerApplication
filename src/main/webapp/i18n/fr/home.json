@@ -1,7 +1,10 @@
 {
     "home": {
         "title": "Bienvenue sur l'application de gestion de vhécules",
+        "taskDetails": "Détails de la tâche",
+        "selectTask":"Veuillez sélectionner une tâche pour obtenir les détails",
         "subtitle": "En charge de gérer votre flotte de véhicules",
+        "vehicle": "Véhicule",
         "logged": {
             "message": "Vous êtes connecté en tant que \"{{username}}\"."
         }

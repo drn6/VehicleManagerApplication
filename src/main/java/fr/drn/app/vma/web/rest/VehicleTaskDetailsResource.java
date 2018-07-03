@@ -2,6 +2,7 @@ package fr.drn.app.vma.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import fr.drn.app.vma.domain.VehicleTaskDetails;
+import fr.drn.app.vma.security.AuthoritiesConstants;
 import fr.drn.app.vma.service.VehicleTaskDetailsService;
 import fr.drn.app.vma.web.rest.errors.BadRequestAlertException;
 import fr.drn.app.vma.web.rest.util.HeaderUtil;
@@ -14,12 +15,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +50,7 @@ public class VehicleTaskDetailsResource {
      */
     @PostMapping("/vehicle-task-details")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<VehicleTaskDetails> createVehicleTaskDetails(@Valid @RequestBody VehicleTaskDetails vehicleTaskDetails) throws URISyntaxException {
         log.debug("REST request to save VehicleTaskDetails : {}", vehicleTaskDetails);
         if (vehicleTaskDetails.getId() != null) {
@@ -71,6 +73,7 @@ public class VehicleTaskDetailsResource {
      */
     @PutMapping("/vehicle-task-details")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<VehicleTaskDetails> updateVehicleTaskDetails(@Valid @RequestBody VehicleTaskDetails vehicleTaskDetails) throws URISyntaxException {
         log.debug("REST request to update VehicleTaskDetails : {}", vehicleTaskDetails);
         if (vehicleTaskDetails.getId() == null) {
@@ -90,11 +93,27 @@ public class VehicleTaskDetailsResource {
      */
     @GetMapping("/vehicle-task-details")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<List<VehicleTaskDetails>> getAllVehicleTaskDetails(Pageable pageable) {
         log.debug("REST request to get a page of VehicleTaskDetails");
         Page<VehicleTaskDetails> page = vehicleTaskDetailsService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/vehicle-task-details");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /vehicle-task-details/task/{taskId} : get all the vehicleTaskDetails.
+     *
+     * @param taskId task id
+     * @return the ResponseEntity with status 200 (OK) and the list of vehicleTaskDetails in body
+     */
+    @GetMapping("/vehicle-task-details/task/{taskId}")
+    @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
+    public ResponseEntity<List<VehicleTaskDetails>> getAllVehicleTaskDetailsByTaskId(@PathVariable Long taskId) {
+        log.debug("REST request to get a page of VehicleTaskDetails");
+        List<VehicleTaskDetails> vehicleTaskDetails = vehicleTaskDetailsService.findAllByTaskId(taskId);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(vehicleTaskDetails));
     }
 
     /**
@@ -105,6 +124,7 @@ public class VehicleTaskDetailsResource {
      */
     @GetMapping("/vehicle-task-details/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<VehicleTaskDetails> getVehicleTaskDetails(@PathVariable Long id) {
         log.debug("REST request to get VehicleTaskDetails : {}", id);
         VehicleTaskDetails vehicleTaskDetails = vehicleTaskDetailsService.findOne(id);
@@ -119,6 +139,7 @@ public class VehicleTaskDetailsResource {
      */
     @DeleteMapping("/vehicle-task-details/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteVehicleTaskDetails(@PathVariable Long id) {
         log.debug("REST request to delete VehicleTaskDetails : {}", id);
         vehicleTaskDetailsService.delete(id);

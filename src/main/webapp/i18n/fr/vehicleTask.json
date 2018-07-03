@@ -1,25 +1,25 @@
-
 {
     "vehicleManagerApplicationApp": {
-        "vehicleTask" : {
+        "vehicleTask": {
             "home": {
-                "title": "VehicleTasks",
-                "createLabel": "Créer un nouveau Vehicle Task",
-                "createOrEditLabel": "Créer ou éditer un Vehicle Task"
+                "title": "Tâches des véhicules",
+                "createLabel": "Créer un nouveau tâches du véhicule",
+                "createOrEditLabel": "Créer ou éditer un tâches du véhicule",
+                "addDriverTitle": "Ajouter ou Supprimer un chauffeur"
             },
-            "created": "Un nouveau Vehicle Task a été créé avec l'identifiant {{ param }}",
-            "updated": "Le Vehicle Task avec l'identifiant {{ param }} a été mis à jour",
-            "deleted": "Le Vehicle Task avec l'identifiant {{ param }} a été supprimé",
+            "created": "Un nouveau tâche du véhicule a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Vehicle tâche du véhicule avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Vehicle tâche du véhicule avec l'identifiant {{ param }} a été supprimé",
             "delete": {
                 "question": "Etes-vous certain de vouloir supprimer le Vehicle Task {{ id }} ?"
             },
             "detail": {
-                "title": "Vehicle Task"
+                "title": "Tâche du véhicule"
             },
-            "name": "Name",
+            "name": "Titre",
             "type": "Type",
             "description": "Description",
-            "maxDrivers": "Max Drivers",
+            "maxDrivers": "Max chauffeurs",
             "startDateTime": "Start Date Time",
             "endDateTime": "End Date Time",
             "createdBy": "Created By",
@@ -28,9 +28,9 @@
             "lastModifiedDate": "Last Modified Date",
             "status": "Status",
             "vehicle": "Vehicle",
-            "detail": "Detail",
             "cost": "Cost",
-            "driver": "Driver"
+            "driver": "Driver",
+            "drivers": "Chauffeurs"
         }
     }
 }

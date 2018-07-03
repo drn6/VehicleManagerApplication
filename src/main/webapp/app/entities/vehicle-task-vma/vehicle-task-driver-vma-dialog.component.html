@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="myVehicleTaskLabel"
+        jhiTranslate="vehicleManagerApplicationApp.vehicleTask.home.addDriverTitle">Create or edit a Vehicle
+        Task</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            (click)="clear()">&times;
+    </button>
+</div>
+<div class="modal-body">
+    <jhi-alert-error></jhi-alert-error>
+    <div class="d-inline-block pl-2" *ngFor="let driverOption of drivers;">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                [ngClass]="{'btn-danger':getSelected(vehicleTask.drivers, driverOption),'btn-info':!getSelected(vehicleTask.drivers, driverOption)}"
+                (click)="addOrRemove(vehicleTask.id,driverOption.id,getSelected(vehicleTask.drivers, driverOption))">
+            <span class="fa fa-plus" *ngIf="!getSelected(vehicleTask.drivers, driverOption)"></span>
+            <span>{{driverOption.firstName}} {{driverOption.lastName}}</span>
+            <span class="fa fa-close" *ngIf="getSelected(vehicleTask.drivers, driverOption)"></span>
+        </button>
+    </div>
+</div>
+<div class="modal-footer">
+
+</div>

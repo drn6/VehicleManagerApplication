@@ -2,8 +2,8 @@
     "vehicleManagerApplicationApp": {
         "VehicleTaskType" : {
             "null": "",
-            "JOURNEY": "JOURNEY",
-            "MAINTENANCE": "MAINTENANCE"
+            "JOURNEY": "Voyage",
+            "MAINTENANCE": "ENTRETIEN"
         }
     }
 }

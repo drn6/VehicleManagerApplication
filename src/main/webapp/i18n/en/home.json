@@ -1,7 +1,10 @@
 {
     "home": {
         "title": "Welcome to Vehicle Manager Backoffice",
+        "taskDetails": "Task Details",
+        "selectTask": "Please select task for get details",
         "subtitle": "In charge to manage your vehicles",
+        "vehicle": "Vehicle",
         "logged": {
             "message": "You are logged in as user \"{{username}}\"."
         }

@@ -1,9 +1,10 @@
 <div>
     <h2>
         <span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.home.title">Vehicle Task Details</span>
-        <button class="btn btn-primary float-right jh-create-entity create-vehicle-task-details-vma" [routerLink]="['/', { outlets: { popup: ['vehicle-task-details-vma-new'] } }]">
+        <button class="btn btn-primary float-right jh-create-entity create-vehicle-task-details-vma"
+                [routerLink]="['/', { outlets: { popup: ['vehicle-task-details-vma-new'] } }]">
             <span class="fa fa-plus"></span>
-            <span  jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.home.createLabel">
+            <span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.home.createLabel">
             Create new Vehicle Task Details
             </span>
         </button>
@@ -16,12 +17,22 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="name"><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.name">Name</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="description"><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.description">Description</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="startDateTime"><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.startDateTime">Start Date Time</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="endDateTime"><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.endDateTime">End Date Time</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="vehicleTask.id"><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.vehicleTask">Vehicle Task</span> <span class="fa fa-sort"></span></th>
-            <th></th>
+                <th jhiSortBy="name"><span
+                    jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.name">Name</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="description"><span
+                    jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.description">Description</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="startDateTime"><span
+                    jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.startDateTime">Start Date Time</span>
+                    <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="endDateTime"><span
+                    jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.endDateTime">End Date Time</span>
+                    <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="vehicleTask.id"><span
+                    jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.vehicleTask">Vehicle Task</span> <span
+                    class="fa fa-sort"></span></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -32,7 +43,9 @@
                 <td>{{vehicleTaskDetails.endDateTime | date:'medium'}}</td>
                 <td>
                     <div *ngIf="vehicleTaskDetails.vehicleTask">
-                        <a [routerLink]="['../vehicle-task-vma', vehicleTaskDetails.vehicleTask?.id ]" >{{vehicleTaskDetails.vehicleTask?.id}}</a>
+                        <a [routerLink]="['../vehicle-task-vma', vehicleTaskDetails.vehicleTask?.id ]">{{vehicleTaskDetails.vehicleTask?.name}}
+                            ({{vehicleTaskDetails.vehicleTask.startDateTime | date:'short'}} -
+                            {{vehicleTaskDetails.vehicleTask.endDateTime | date:'short'}})</a>
                     </div>
                 </td>
                 <td class="text-right">
@@ -67,10 +80,12 @@
     </div>
     <div *ngIf="vehicleTaskDetails && vehicleTaskDetails.length">
         <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5"
+                            [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>
         <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                            [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
         </div>
     </div>
 </div>

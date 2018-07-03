@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Component, OnInit} from '@angular/core';
+import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { Account, LoginModalService, Principal } from '../shared';
+import {Account, LoginModalService, Principal} from '../shared';
+import {VehicleTaskVmaService} from "../entities/vehicle-task-vma/vehicle-task-vma.service";
+import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 
 @Component({
     selector: 'jhi-home',
@@ -15,10 +17,14 @@ import { Account, LoginModalService, Principal } from '../shared';
 export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
+    tasks: any;
+    taskDetails: any;
+    tasksDays: any;
 
     constructor(
         private principal: Principal,
         private loginModalService: LoginModalService,
+        private vehicleTaskService: VehicleTaskVmaService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -27,6 +33,12 @@ export class HomeComponent implements OnInit {
         this.principal.identity().then((account) => {
             this.account = account;
         });
+        this.vehicleTaskService.dashboard()
+            .subscribe((res: HttpResponse<any>) => {
+                this.tasksDays = Object.keys(res.body);
+                this.tasks = res.body;
+                console.log(res)
+            }, (res: HttpErrorResponse) => console.log(res.message));
         this.registerAuthenticationSuccess();
     }
 
@@ -36,6 +48,10 @@ export class HomeComponent implements OnInit {
                 this.account = account;
             });
         });
+    }
+
+    loadDetails(task) {
+        this.taskDetails = task;
     }
 
     isAuthenticated() {

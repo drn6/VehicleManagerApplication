@@ -5,6 +5,7 @@ import { VehicleManagerApplicationSharedModule } from '../../shared';
 import {
     VehicleTaskVmaService,
     VehicleTaskVmaPopupService,
+
     VehicleTaskVmaComponent,
     VehicleTaskVmaDetailComponent,
     VehicleTaskVmaDialogComponent,
@@ -15,6 +16,10 @@ import {
     vehicleTaskPopupRoute,
     VehicleTaskVmaResolvePagingParams,
 } from './';
+import {
+    VehicleTaskDriverVmaDialogComponent,
+    VehicleTaskDriverVmaPopupComponent
+} from "./vehicle-task-driver-vma-dialog.component";
 
 const ENTITY_STATES = [
     ...vehicleTaskRoute,
@@ -30,16 +35,20 @@ const ENTITY_STATES = [
         VehicleTaskVmaComponent,
         VehicleTaskVmaDetailComponent,
         VehicleTaskVmaDialogComponent,
+        VehicleTaskDriverVmaDialogComponent,
         VehicleTaskVmaDeleteDialogComponent,
         VehicleTaskVmaPopupComponent,
+        VehicleTaskDriverVmaPopupComponent,
         VehicleTaskVmaDeletePopupComponent,
     ],
     entryComponents: [
         VehicleTaskVmaComponent,
         VehicleTaskVmaDialogComponent,
+        VehicleTaskDriverVmaDialogComponent,
         VehicleTaskVmaPopupComponent,
         VehicleTaskVmaDeleteDialogComponent,
         VehicleTaskVmaDeletePopupComponent,
+        VehicleTaskDriverVmaPopupComponent
     ],
     providers: [
         VehicleTaskVmaService,

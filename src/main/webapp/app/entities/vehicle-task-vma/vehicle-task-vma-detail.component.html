@@ -1,6 +1,17 @@
-
 <div *ngIf="vehicleTask">
-    <h2><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.detail.title">Vehicle Task</span> {{vehicleTask.id}}</h2>
+    <h2><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.detail.title">Vehicle Task</span>
+        {{vehicleTask.id}}
+
+        <button class="btn btn-primary float-right jh-create-entity create-vehicle-task-details-vma"
+                [routerLink]="['/', { outlets: { popup: 'vehicle-task-vma/'+vehicleTask.id+'/addDriver'} }]"
+                replaceUrl="true"
+                queryParamsHandling="merge">
+            <span class="fa fa-plus"></span>
+            <span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.home.addDriverTitle">
+            Add driver
+            </span>
+        </button>
+    </h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
@@ -28,39 +39,123 @@
         <dd>
             <span>{{vehicleTask.endDateTime | date:'medium'}}</span>
         </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.createdBy">Created By</span></dt>
-        <dd>
-            <span>{{vehicleTask.createdBy}}</span>
-        </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.createdDate">Created Date</span></dt>
-        <dd>
-            <span>{{vehicleTask.createdDate | date:'medium'}}</span>
-        </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.lastModifiedBy">Last Modified By</span></dt>
-        <dd>
-            <span>{{vehicleTask.lastModifiedBy}}</span>
-        </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.lastModifiedDate">Last Modified Date</span></dt>
-        <dd>
-            <span>{{vehicleTask.lastModifiedDate | date:'medium'}}</span>
-        </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.status">Status</span></dt>
-        <dd>
-            <span jhiTranslate="{{'vehicleManagerApplicationApp.StatusType.' + vehicleTask.status}}">{{vehicleTask.status}}</span>
-        </dd>
         <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.vehicle">Vehicle</span></dt>
         <dd>
             <div *ngIf="vehicleTask.vehicle">
-                <a [routerLink]="['/vehicle-vma', vehicleTask.vehicle?.id]">{{vehicleTask.vehicle?.id}}</a>
+                <a [routerLink]="['/vehicle-vma', vehicleTask.vehicle?.id]">
+                    {{vehicleTask.vehicle.name}} </a>
             </div>
         </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.driver">Driver</span></dt>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.drivers">Drivers</span></dt>
         <dd>
             <span *ngFor="let driver of vehicleTask.drivers; let last = last">
-                <a [routerLink]="['/driver-vma', driver?.id ]">{{driver.firstName}}</a>{{last ? '' : ', '}}
+                <a [routerLink]="['/driver-vma', driver?.id ]">{{driver.firstName}} {{driver.lastName}}</a>{{last ? '' : ', '}}
             </span>
         </dd>
     </dl>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="table-responsive" *ngIf="vehicleTaskDetails">
+                <h2>
+                    <span
+                        jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.home.title">Vehicle Task Details</span>
+                    <button class="btn btn-primary float-right jh-create-entity create-vehicle-task-details-vma"
+                            [routerLink]="['/', { outlets: { popup: 'vehicle-task-details-vma-new/task/'+ vehicleTask.id} }]"
+                            replaceUrl="true"
+                            queryParamsHandling="merge">
+                        <span class="fa fa-plus"></span>
+                        <span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.home.createLabel">
+            Create new Vehicle Task Details
+            </span>
+                    </button>
+                </h2>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th><span
+                            jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.name">Name</span></th>
+                        <th><span
+                            jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.description">Description</span>
+                        </th>
+                        <th><span
+                            jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.startDateTime">Start Date Time</span>
+                        </th>
+                        <th><span
+                            jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.endDateTime">End Date Time</span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let vehicleTaskDetails of vehicleTaskDetails ;trackBy: trackId">
+                        <td>{{vehicleTaskDetails.name}}</td>
+                        <td>{{vehicleTaskDetails.description}}</td>
+                        <td>{{vehicleTaskDetails.startDateTime | date:'medium'}}</td>
+                        <td>{{vehicleTaskDetails.endDateTime | date:'medium'}}</td>
+                        <td class="text-right">
+                            <div class="btn-group flex-btn-group-container">
+                                <button type="submit"
+                                        [routerLink]="['/', { outlets: { popup: 'vehicle-task-details-vma/'+ vehicleTaskDetails.id + '/edit'} }]"
+                                        replaceUrl="true"
+                                        queryParamsHandling="merge"
+                                        class="btn btn-primary btn-sm">
+                                    <span class="fa fa-pencil"></span>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                </button>
+                                <button type="submit"
+                                        [routerLink]="['/', { outlets: { popup: 'vehicle-task-details-vma/'+ vehicleTaskDetails.id + '/delete'} }]"
+                                        replaceUrl="true"
+                                        queryParamsHandling="merge"
+                                        class="btn btn-danger btn-sm">
+                                    <span class="fa fa-remove"></span>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="table-responsive" *ngIf="costs">
+                <h2>
+                    <span jhiTranslate="vehicleManagerApplicationApp.cost.home.title">Costs</span>
+
+                    <button class="btn btn-primary float-right jh-create-entity create-cost-vma"
+                            [routerLink]="['/', { outlets: { popup: 'cost-vma-new/task/'+ vehicleTask.id} }]"
+                            replaceUrl="true"
+                            queryParamsHandling="merge">
+                        <span class="fa fa-plus"></span>
+                        <span jhiTranslate="vehicleManagerApplicationApp.cost.home.createLabel">
+            Create new Cost
+            </span>
+                    </button>
+                </h2>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th><span jhiTranslate="vehicleManagerApplicationApp.cost.name">Name</span></th>
+                        <th><span jhiTranslate="vehicleManagerApplicationApp.cost.type">Type</span></th>
+                        <th><span jhiTranslate="vehicleManagerApplicationApp.cost.cost">Cost</span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let cost of costs ;trackBy: trackId">
+                        <td>{{cost.name}}</td>
+                        <td jhiTranslate="{{'vehicleManagerApplicationApp.CostType.' + cost.type}}">{{cost.type}}</td>
+                        <td>{{cost.cost}}€</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><b jhiTranslate="vehicleManagerApplicationApp.cost.total">Total</b>: <b>{{costTotal}}€</b>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
     <button type="submit"
             (click)="previousState()"

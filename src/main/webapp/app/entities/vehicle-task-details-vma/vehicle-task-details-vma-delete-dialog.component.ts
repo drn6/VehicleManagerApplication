@@ -33,6 +33,7 @@ export class VehicleTaskDetailsVmaDeleteDialogComponent {
                 name: 'vehicleTaskDetailsListModification',
                 content: 'Deleted an vehicleTaskDetails'
             });
+            this.eventManager.broadcast({name: 'vehicleTaskListModification', content: 'OK'});
             this.activeModal.dismiss(true);
         });
     }

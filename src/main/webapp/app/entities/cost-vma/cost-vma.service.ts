@@ -1,47 +1,53 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { SERVER_API_URL } from '../../app.constants';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import {SERVER_API_URL} from '../../app.constants';
 
-import { JhiDateUtils } from 'ng-jhipster';
+import {JhiDateUtils} from 'ng-jhipster';
 
-import { CostVma } from './cost-vma.model';
-import { createRequestOption } from '../../shared';
+import {CostVma} from './cost-vma.model';
+import {createRequestOption} from '../../shared';
 
 export type EntityResponseType = HttpResponse<CostVma>;
 
 @Injectable()
 export class CostVmaService {
 
-    private resourceUrl =  SERVER_API_URL + 'api/costs';
+    private resourceUrl = SERVER_API_URL + 'api/costs';
 
-    constructor(private http: HttpClient, private dateUtils: JhiDateUtils) { }
+    constructor(private http: HttpClient, private dateUtils: JhiDateUtils) {
+    }
 
     create(cost: CostVma): Observable<EntityResponseType> {
         const copy = this.convert(cost);
-        return this.http.post<CostVma>(this.resourceUrl, copy, { observe: 'response' })
+        return this.http.post<CostVma>(this.resourceUrl, copy, {observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
     update(cost: CostVma): Observable<EntityResponseType> {
         const copy = this.convert(cost);
-        return this.http.put<CostVma>(this.resourceUrl, copy, { observe: 'response' })
+        return this.http.put<CostVma>(this.resourceUrl, copy, {observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
     find(id: number): Observable<EntityResponseType> {
-        return this.http.get<CostVma>(`${this.resourceUrl}/${id}`, { observe: 'response'})
+        return this.http.get<CostVma>(`${this.resourceUrl}/${id}`, {observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
     query(req?: any): Observable<HttpResponse<CostVma[]>> {
         const options = createRequestOption(req);
-        return this.http.get<CostVma[]>(this.resourceUrl, { params: options, observe: 'response' })
+        return this.http.get<CostVma[]>(this.resourceUrl, {params: options, observe: 'response'})
+            .map((res: HttpResponse<CostVma[]>) => this.convertArrayResponse(res));
+    }
+
+    findByTaskId(taskId: number): Observable<HttpResponse<CostVma[]>> {
+        return this.http.get<CostVma[]>(`${this.resourceUrl}/task/${taskId}`, {observe: 'response'})
             .map((res: HttpResponse<CostVma[]>) => this.convertArrayResponse(res));
     }
 
     delete(id: number): Observable<HttpResponse<any>> {
-        return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response'});
+        return this.http.delete<any>(`${this.resourceUrl}/${id}`, {observe: 'response'});
     }
 
     private convertResponse(res: EntityResponseType): EntityResponseType {

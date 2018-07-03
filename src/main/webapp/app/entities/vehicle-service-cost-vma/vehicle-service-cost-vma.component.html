@@ -67,7 +67,9 @@
                         vehicleServiceCost.perDay*nbDays + vehicleServiceCost.perDiver*nbDriver}} €</b>  </p></td>
                 <td>
                     <div *ngIf="vehicleServiceCost.vehicle">
-                        <a [routerLink]="['../vehicle-vma', vehicleServiceCost.vehicle?.id ]" >{{vehicleServiceCost.vehicle?.id}}</a>
+                        <a [routerLink]="['../vehicle-vma', vehicleServiceCost.vehicle?.id ]" >{{vehicleServiceCost.vehicle?.name}}
+                            (<span
+                                jhiTranslate="vehicleManagerApplicationApp.vehicle.numberOfPlace"></span>:{{vehicleServiceCost.vehicle.numberOfPlace}})</a>
                     </div>
                 </td>
                 <td class="text-right">

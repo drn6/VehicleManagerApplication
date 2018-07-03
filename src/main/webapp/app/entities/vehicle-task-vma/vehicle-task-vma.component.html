@@ -37,7 +37,7 @@
                 <td jhiTranslate="{{'vehicleManagerApplicationApp.StatusType.' + vehicleTask.status}}">{{vehicleTask.status}}</td>
                 <td>
                     <div *ngIf="vehicleTask.vehicle">
-                        <a [routerLink]="['../vehicle-vma', vehicleTask.vehicle?.id ]" >{{vehicleTask.vehicle?.id}}</a>
+                        <a [routerLink]="['../vehicle-vma', vehicleTask.vehicle?.id ]" >{{vehicleTask.vehicle?.name}}</a>
                     </div>
                 </td>
                 <td class="text-right">

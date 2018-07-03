@@ -1,27 +1,36 @@
 package fr.drn.app.vma.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import fr.drn.app.vma.domain.enumeration.StatusType;
+import fr.drn.app.vma.domain.enumeration.VehicleTaskType;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
-
-import fr.drn.app.vma.domain.enumeration.VehicleTaskType;
-
-import fr.drn.app.vma.domain.enumeration.StatusType;
+import java.util.Set;
 
 /**
  * A VehicleTask.
  */
 @Entity
 @Table(name = "vehicle_task")
-public class VehicleTask  extends AbstractAuditingEntity implements Serializable {
+@NamedEntityGraphs(
+    @NamedEntityGraph(
+        name = "fullTasks",
+        attributeNodes = {
+            @NamedAttributeNode(value = "details"),
+            @NamedAttributeNode(value = "drivers")
+        }
+    )
+)
+public class VehicleTask extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -74,8 +83,9 @@ public class VehicleTask  extends AbstractAuditingEntity implements Serializable
 
     @ManyToMany
     @JoinTable(name = "vehicle_task_driver",
-               joinColumns = @JoinColumn(name="vehicle_tasks_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="drivers_id", referencedColumnName="id"))
+        joinColumns = @JoinColumn(name = "vehicle_tasks_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "drivers_id", referencedColumnName = "id"))
+    @BatchSize(size = 5)
     private Set<Driver> drivers = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

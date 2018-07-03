@@ -24,7 +24,8 @@
             "lastModifiedBy": "Last Modified By",
             "lastModifiedDate": "Last Modified Date",
             "status": "Status",
-            "vehicleTask": "Vehicle Task"
+            "vehicleTask": "Vehicle Task",
+            "total": "Total"
         }
     }
 }

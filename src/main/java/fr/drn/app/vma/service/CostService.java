@@ -4,6 +4,8 @@ import fr.drn.app.vma.domain.Cost;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * Service Interface for managing Cost.
  */
@@ -24,6 +26,14 @@ public interface CostService {
      * @return the list of entities
      */
     Page<Cost> findAll(Pageable pageable);
+
+    /**
+     * Get all the costs by task id.
+     *
+     * @param taskId task id
+     * @return the list of entities
+     */
+    List<Cost> findAllByTaskId(Long taskId);
 
     /**
      * Get the "id" cost.

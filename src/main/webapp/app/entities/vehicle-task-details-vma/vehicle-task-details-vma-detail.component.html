@@ -1,6 +1,6 @@
-
 <div *ngIf="vehicleTaskDetails">
-    <h2><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.detail.title">Vehicle Task Details</span> {{vehicleTaskDetails.id}}</h2>
+    <h2><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.detail.title">Vehicle Task Details</span>
+        {{vehicleTaskDetails.id}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
@@ -12,7 +12,8 @@
         <dd>
             <span>{{vehicleTaskDetails.description}}</span>
         </dd>
-        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.startDateTime">Start Date Time</span></dt>
+        <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.startDateTime">Start Date Time</span>
+        </dt>
         <dd>
             <span>{{vehicleTaskDetails.startDateTime | date:'medium'}}</span>
         </dd>
@@ -23,7 +24,9 @@
         <dt><span jhiTranslate="vehicleManagerApplicationApp.vehicleTaskDetails.vehicleTask">Vehicle Task</span></dt>
         <dd>
             <div *ngIf="vehicleTaskDetails.vehicleTask">
-                <a [routerLink]="['/vehicle-task-vma', vehicleTaskDetails.vehicleTask?.id]">{{vehicleTaskDetails.vehicleTask?.id}}</a>
+                <a [routerLink]="['/vehicle-task-vma', vehicleTaskDetails.vehicleTask?.id]">{{vehicleTaskDetails.vehicleTask?.name}}
+                    ({{vehicleTaskDetails.vehicleTask.startDateTime | date:'short'}} -
+                    {{vehicleTaskDetails.vehicleTask.endDateTime | date:'short'}})</a>
             </div>
         </dd>
     </dl>

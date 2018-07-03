@@ -2,9 +2,9 @@
     "vehicleManagerApplicationApp": {
         "VehicleServiceCostType" : {
             "null": "",
-            "SPECIAL": "SPECIAL",
-            "REGULAR": "REGULAR",
-            "HOLIDAY": "HOLIDAY"
+            "SPECIAL": "SPÉCIAL",
+            "REGULAR": "NORMAL",
+            "HOLIDAY": "VACANCES"
         }
     }
 }

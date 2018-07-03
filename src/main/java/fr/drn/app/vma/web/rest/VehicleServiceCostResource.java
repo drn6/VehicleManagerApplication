@@ -2,6 +2,7 @@ package fr.drn.app.vma.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import fr.drn.app.vma.domain.VehicleServiceCost;
+import fr.drn.app.vma.security.AuthoritiesConstants;
 import fr.drn.app.vma.service.VehicleServiceCostService;
 import fr.drn.app.vma.web.rest.errors.BadRequestAlertException;
 import fr.drn.app.vma.web.rest.util.HeaderUtil;
@@ -14,12 +15,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +50,7 @@ public class VehicleServiceCostResource {
      */
     @PostMapping("/vehicle-service-costs")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<VehicleServiceCost> createVehicleServiceCost(@Valid @RequestBody VehicleServiceCost vehicleServiceCost) throws URISyntaxException {
         log.debug("REST request to save VehicleServiceCost : {}", vehicleServiceCost);
         if (vehicleServiceCost.getId() != null) {
@@ -71,6 +73,7 @@ public class VehicleServiceCostResource {
      */
     @PutMapping("/vehicle-service-costs")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<VehicleServiceCost> updateVehicleServiceCost(@Valid @RequestBody VehicleServiceCost vehicleServiceCost) throws URISyntaxException {
         log.debug("REST request to update VehicleServiceCost : {}", vehicleServiceCost);
         if (vehicleServiceCost.getId() == null) {
@@ -90,6 +93,7 @@ public class VehicleServiceCostResource {
      */
     @GetMapping("/vehicle-service-costs")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<List<VehicleServiceCost>> getAllVehicleServiceCosts(Pageable pageable) {
         log.debug("REST request to get a page of VehicleServiceCosts");
         Page<VehicleServiceCost> page = vehicleServiceCostService.findAll(pageable);
@@ -105,6 +109,7 @@ public class VehicleServiceCostResource {
      */
     @GetMapping("/vehicle-service-costs/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<VehicleServiceCost> getVehicleServiceCost(@PathVariable Long id) {
         log.debug("REST request to get VehicleServiceCost : {}", id);
         VehicleServiceCost vehicleServiceCost = vehicleServiceCostService.findOne(id);
@@ -119,6 +124,7 @@ public class VehicleServiceCostResource {
      */
     @DeleteMapping("/vehicle-service-costs/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteVehicleServiceCost(@PathVariable Long id) {
         log.debug("REST request to delete VehicleServiceCost : {}", id);
         vehicleServiceCostService.delete(id);
