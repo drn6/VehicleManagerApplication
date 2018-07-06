@@ -102,7 +102,7 @@
             <label class="form-control-label" jhiTranslate="vehicleManagerApplicationApp.vehicleServiceCost.vehicle" for="field_vehicle">Vehicle</label>
             <select class="form-control" id="field_vehicle" name="vehicle" [(ngModel)]="vehicleServiceCost.vehicle" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="vehicleOption.id === vehicleServiceCost.vehicle?.id ? vehicleServiceCost.vehicle : vehicleOption" *ngFor="let vehicleOption of vehicles; trackBy: trackVehicleById">{{vehicleOption.id}}</option>
+                <option [ngValue]="vehicleOption.id === vehicleServiceCost.vehicle?.id ? vehicleServiceCost.vehicle : vehicleOption" *ngFor="let vehicleOption of vehicles; trackBy: trackVehicleById">{{vehicleOption.name}}</option>
             </select>
         </div>
     </div>

@@ -55,6 +55,10 @@ export class VehicleTaskVmaService {
         return this.http.get<any>(`${this.resourceUrl}/dashboard`, {params: options, observe: 'response'});
     }
 
+    sendAlerts(id: number): Observable<any> {
+        let options: HttpParams = new HttpParams();
+        return this.http.get<any>(`${this.resourceUrl}/sendAlerts/${id}`, {params: options, observe: 'response'});
+    }
 
     query(req?: any): Observable<HttpResponse<VehicleTaskVma[]>> {
         const options = createRequestOption(req);

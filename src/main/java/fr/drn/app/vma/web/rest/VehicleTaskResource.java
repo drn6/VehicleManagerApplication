@@ -60,6 +60,14 @@ public class VehicleTaskResource {
             .body(result);
     }
 
+    @GetMapping("/vehicle-tasks/sendAlerts/{id}")
+    @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
+    public ResponseEntity<Void> createVehicleTask(@PathVariable Long id) throws URISyntaxException {
+        vehicleTaskService.sendMailNewTaskAvailable(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createAlert("Send email for new task available", id.toString())).build();
+    }
+
     /**
      * POST  /vehicle-tasks : Create a new vehicleTask.
      *

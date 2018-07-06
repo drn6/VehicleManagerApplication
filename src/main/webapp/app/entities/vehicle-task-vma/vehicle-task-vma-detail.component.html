@@ -2,6 +2,7 @@
     <h2><span jhiTranslate="vehicleManagerApplicationApp.vehicleTask.detail.title">Vehicle Task</span>
         {{vehicleTask.id}}
 
+        <button class="btn btn-secondary float-right ml-1" (click)="sendEmails()">sendEmails</button>
         <button class="btn btn-primary float-right jh-create-entity create-vehicle-task-details-vma"
                 [routerLink]="['/', { outlets: { popup: 'vehicle-task-vma/'+vehicleTask.id+'/addDriver'} }]"
                 replaceUrl="true"

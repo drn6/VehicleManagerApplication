@@ -21,24 +21,18 @@ export class HomeComponent implements OnInit {
     taskDetails: any;
     tasksDays: any;
 
-    constructor(
-        private principal: Principal,
-        private loginModalService: LoginModalService,
-        private vehicleTaskService: VehicleTaskVmaService,
-        private eventManager: JhiEventManager
-    ) {
+    constructor(private principal: Principal,
+                private loginModalService: LoginModalService,
+                private vehicleTaskService: VehicleTaskVmaService,
+                private eventManager: JhiEventManager) {
     }
 
     ngOnInit() {
         this.principal.identity().then((account) => {
             this.account = account;
+            this.loadVehicle();
         });
-        this.vehicleTaskService.dashboard()
-            .subscribe((res: HttpResponse<any>) => {
-                this.tasksDays = Object.keys(res.body);
-                this.tasks = res.body;
-                console.log(res)
-            }, (res: HttpErrorResponse) => console.log(res.message));
+
         this.registerAuthenticationSuccess();
     }
 
@@ -46,12 +40,21 @@ export class HomeComponent implements OnInit {
         this.eventManager.subscribe('authenticationSuccess', (message) => {
             this.principal.identity().then((account) => {
                 this.account = account;
+                this.loadVehicle();
             });
         });
     }
 
     loadDetails(task) {
         this.taskDetails = task;
+    }
+
+    loadVehicle() {
+        this.vehicleTaskService.dashboard()
+            .subscribe((res: HttpResponse<any>) => {
+                this.tasksDays = Object.keys(res.body);
+                this.tasks = res.body;
+            }, (res: HttpErrorResponse) => console.log(res.message));
     }
 
     isAuthenticated() {

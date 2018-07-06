@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Subscription} from 'rxjs/Subscription';
 import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
@@ -25,14 +25,13 @@ export class VehicleTaskVmaDetailComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
-    constructor(
-        private eventManager: JhiEventManager,
-        private vehicleTaskService: VehicleTaskVmaService,
-        private vehicleTaskDetailsService: VehicleTaskDetailsVmaService,
-        private costService: CostVmaService,
-        private jhiAlertService: JhiAlertService,
-        private route: ActivatedRoute
-    ) {
+    constructor(private eventManager: JhiEventManager,
+                private vehicleTaskService: VehicleTaskVmaService,
+                private vehicleTaskDetailsService: VehicleTaskDetailsVmaService,
+                private costService: CostVmaService,
+                private jhiAlertService: JhiAlertService,
+                private router: Router,
+                private route: ActivatedRoute) {
     }
 
     ngOnInit() {
@@ -40,6 +39,17 @@ export class VehicleTaskVmaDetailComponent implements OnInit, OnDestroy {
             this.load(params['id']);
         });
         this.registerChangeInVehicleTasks();
+    }
+
+    sendEmails() {
+        if (this.vehicleTask) {
+            this.vehicleTaskService.sendAlerts(this.vehicleTask.id).subscribe(
+                () => {
+                    this.jhiAlertService.success('vehicleManagerApplicationApp.vehicleTask.email', null, null);
+                    this.router.navigate(['/vehicle-task-vma']);
+                },
+                () => this.jhiAlertService.error('Error to send emails', null, null));
+        }
     }
 
     load(id) {

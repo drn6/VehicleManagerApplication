@@ -1,9 +1,9 @@
 package fr.drn.app.vma.service;
 
 import fr.drn.app.vma.domain.User;
-
+import fr.drn.app.vma.domain.VehicleTask;
 import io.github.jhipster.config.JHipsterProperties;
-
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.CharEncoding;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +30,8 @@ public class MailService {
 
     private static final String USER = "user";
 
+    private static final String TASK = "task";
+
     private static final String BASE_URL = "baseUrl";
 
     private final JHipsterProperties jHipsterProperties;
@@ -41,7 +43,7 @@ public class MailService {
     private final SpringTemplateEngine templateEngine;
 
     public MailService(JHipsterProperties jHipsterProperties, JavaMailSender javaMailSender,
-            MessageSource messageSource, SpringTemplateEngine templateEngine) {
+                       MessageSource messageSource, SpringTemplateEngine templateEngine) {
 
         this.jHipsterProperties = jHipsterProperties;
         this.javaMailSender = javaMailSender;
@@ -50,7 +52,7 @@ public class MailService {
     }
 
     @Async
-    public void sendEmail(String to, String subject, String content, boolean isMultipart, boolean isHtml) {
+    public void sendEmail(String[] to, String subject, String content, boolean isMultipart, boolean isHtml) {
         log.debug("Send email[multipart '{}' and html '{}'] to '{}' with subject '{}' and content={}",
             isMultipart, isHtml, to, subject, content);
 
@@ -81,8 +83,18 @@ public class MailService {
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
         String content = templateEngine.process(templateName, context);
         String subject = messageSource.getMessage(titleKey, null, locale);
-        sendEmail(user.getEmail(), subject, content, false, true);
+        sendEmail(ArrayUtils.toArray(user.getEmail()), subject, content, false, true);
+    }
 
+    @Async
+    public void sendTaskEmailFromTemplate(VehicleTask vt, String[] to, String langKey, String templateName, String titleKey) {
+        Locale locale = Locale.forLanguageTag(langKey);
+        Context context = new Context(locale);
+        context.setVariable(TASK, vt);
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        String content = templateEngine.process(templateName, context);
+        String subject = messageSource.getMessage(titleKey, null, locale);
+        sendEmail(to, subject, content, false, true);
     }
 
     @Async
@@ -101,5 +113,11 @@ public class MailService {
     public void sendPasswordResetMail(User user) {
         log.debug("Sending password reset email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "passwordResetEmail", "email.reset.title");
+    }
+
+    @Async
+    public void sendMailNewTaskAvailable(VehicleTask vt, String[] to) {
+        log.debug("Sending email for new task '{}'", vt.getName());
+        sendTaskEmailFromTemplate(vt, to, "fr", "newTaskEmail", "email.task.title");
     }
 }

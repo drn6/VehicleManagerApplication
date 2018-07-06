@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="#{email.task.title}">New trip</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="shortcut icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+    </head>
+    <body>
+        <p th:text="#{email.task.greeting}">
+            Dear
+        </p>
+        <p th:text="#{email.task.text1}"></p>
+        <dl>
+            <dt th:text="#{email.task.name}"></dt>
+            <dd th:text="${task.name}"></dd>
+            <dt th:text="#{email.task.date}"></dt>
+            <dd><b th:text="${task.startDateTime}"></b> - <b th:text="${task.endDateTime}"></b></dd>
+        </dl>
+        <p>
+            <span th:text="#{email.task.text2}">Regards, </span>
+            <br/>
+            <em th:text="#{email.signature}"></em>
+        </p>
+    </body>
+</html>

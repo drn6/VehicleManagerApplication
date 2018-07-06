@@ -1,6 +1,7 @@
 {
     "vehicleManagerApplicationApp": {
         "vehicleTask": {
+            "email":"les messages ont été envoyés",
             "home": {
                 "title": "Vehicle Tasks",
                 "createLabel": "Create a new Vehicle Task",

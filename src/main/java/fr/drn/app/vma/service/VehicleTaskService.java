@@ -26,6 +26,8 @@ public interface VehicleTaskService {
 
     VehicleTask removeDriver(Long taskId, Long driverId);
 
+    void sendMailNewTaskAvailable(Long id);
+
     /**
      * Get all the vehicleTasks.
      *

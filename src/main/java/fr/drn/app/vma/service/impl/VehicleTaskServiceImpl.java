@@ -8,11 +8,14 @@ import fr.drn.app.vma.repository.UserRepository;
 import fr.drn.app.vma.repository.VehicleTaskRepository;
 import fr.drn.app.vma.security.AuthoritiesConstants;
 import fr.drn.app.vma.security.SecurityUtils;
+import fr.drn.app.vma.service.MailService;
 import fr.drn.app.vma.service.VehicleTaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,14 +36,17 @@ public class VehicleTaskServiceImpl implements VehicleTaskService {
 
     private final Logger log = LoggerFactory.getLogger(VehicleTaskServiceImpl.class);
 
+    private static final Integer PAGE_SIZE = 100;
     private final VehicleTaskRepository vehicleTaskRepository;
     private final DriverRepository driverRepository;
     private final UserRepository userRepository;
+    private final MailService mailService;
 
-    public VehicleTaskServiceImpl(VehicleTaskRepository vehicleTaskRepository, DriverRepository driverRepository, UserRepository userRepository) {
+    public VehicleTaskServiceImpl(VehicleTaskRepository vehicleTaskRepository, DriverRepository driverRepository, UserRepository userRepository, MailService mailService) {
         this.vehicleTaskRepository = vehicleTaskRepository;
         this.driverRepository = driverRepository;
         this.userRepository = userRepository;
+        this.mailService = mailService;
     }
 
     /**
@@ -52,7 +58,31 @@ public class VehicleTaskServiceImpl implements VehicleTaskService {
     @Override
     public VehicleTask save(VehicleTask vehicleTask) {
         log.debug("Request to save VehicleTask : {}", vehicleTask);
-        return vehicleTaskRepository.save(vehicleTask);
+        vehicleTask = vehicleTaskRepository.save(vehicleTask);
+        return vehicleTask;
+    }
+
+    public void sendMailNewTaskAvailable(Long id) {
+        log.debug("Request to sendMailNewTaskAvailable VehicleTask : {}", id);
+        VehicleTask vehicleTask = vehicleTaskRepository.findOneWithEagerRelationships(id);
+        if (vehicleTask != null) {
+            sendMailNewTaskAvailable(vehicleTask);
+        }
+    }
+
+    @Async
+    private void sendMailNewTaskAvailable(VehicleTask vehicleTask) {
+        Page<User> allActivatedUser = null;
+        List<String> allAdresseEmail = new ArrayList<>();
+        int pageNumber = 0;
+        do {
+            allActivatedUser = userRepository.findAllByActivated(true, new PageRequest(pageNumber, PAGE_SIZE));
+            allAdresseEmail.addAll(allActivatedUser.getContent().stream().map(u -> u.getEmail()).collect(Collectors.toList()));
+            pageNumber++;
+        } while (allActivatedUser.hasNext());
+        String[] emailAddress = new String[allAdresseEmail.size()];
+        allAdresseEmail.toArray(emailAddress);
+        mailService.sendMailNewTaskAvailable(vehicleTask, emailAddress);
     }
 
     /**
